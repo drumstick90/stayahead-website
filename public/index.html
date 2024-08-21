@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StayAhead! - Weekly Top Research Papers</title>
+    <style>
+        /* Add your CSS styles here */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo">StayAhead</div>
+            <!-- Add navigation items -->
+        </nav>
+        
+        <section class="hero">
+            <h1>StayAhead! of Your Field</h1>
+            <p>Don't waste <strong>hours</strong> scrolling through useless scientific papers.</p>
+            <p>Read only the <strong>most talked about</strong> ones.</p>
+            <p>Just at <strong>1 $</strong> per week.</p>
+        </section>
+
+        <div class="cta-form-container">
+            <form id="cta-form" class="cta-form">
+                <input type="email" id="email" placeholder="you@example.com" required>
+                <button type="submit" class="cta-button">Sign up for free!</button>
+            </form>
+        </div>
+
+        <!-- Add more sections as needed -->
+    </div>
+
+    <script>
+        document.getElementById('cta-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            fetch('/api/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Thank you for signing up!');
+                document.getElementById('email').value = '';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            });
+        });
+    </script>
+</body>
+</html>

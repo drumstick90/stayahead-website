@@ -1,0 +1,8 @@
+{
+    "name": "stayahead-website",
+    "version": "1.0.0",
+    "description": "StayAhead website for scientific paper updates",
+    "dependencies": {
+      "mongoose": "^5.12.3"
+    }
+  }
