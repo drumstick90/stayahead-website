@@ -1,6 +1,4 @@
-const mongoose = require('mongoose');
-
-let conn = null;
+import mongoose from 'mongoose';
 
 const URI = process.env.MONGODB_URI;
 
@@ -9,31 +7,54 @@ const emailSchema = new mongoose.Schema({
   timestamp: { type: Date, default: Date.now }
 });
 
-module.exports = async (req, res) => {
+let Email;
+if (mongoose.models.Email) {
+  Email = mongoose.model('Email');
+} else {
+  Email = mongoose.model('Email', emailSchema);
+}
+
+let cachedConnection = null;
+
+async function connectToDatabase() {
+  if (cachedConnection) {
+    return cachedConnection;
+  }
+
+  const connection = await mongoose.connect(URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+
+  cachedConnection = connection;
+  return connection;
+}
+
+export default async function handler(req, res) {
   if (req.method === 'POST') {
-    if (!conn) {
-      conn = await mongoose.connect(URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
-    }
-    
-    const Email = mongoose.models.Email || mongoose.model('Email', emailSchema);
-
-    const { email } = req.body;
-
     try {
+      await connectToDatabase();
+      
+      const { email } = req.body;
+
       const newEmail = new Email({ email });
       await newEmail.save();
+      
       res.status(201).json({ message: 'Email subscribed successfully' });
     } catch (error) {
       if (error.code === 11000) {
         return res.status(400).json({ message: 'Email already subscribed' });
       }
       res.status(500).json({ message: 'Error subscribing email', error: error.message });
+    } finally {
+      // Close the connection
+      if (cachedConnection) {
+        await mongoose.disconnect();
+        cachedConnection = null;
+      }
     }
   } else {
     res.setHeader('Allow', ['POST']);
     res.status(405).end(`Method ${req.method} Not Allowed`);
   }
-};
+}
