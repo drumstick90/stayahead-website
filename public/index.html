@@ -36,19 +36,24 @@
         document.getElementById('cta-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const email = document.getElementById('email').value;
-            fetch('/api/subscribe.js', {
+            fetch('/api/subscribe', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email })
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
                 alert('Thank you for signing up!');
                 document.getElementById('email').value = '';
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('An error occurred. Please try again.');
+                alert('An error occurred while trying to subscribe. Please try again later or contact support.');
             });
         });
     </script>
