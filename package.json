@@ -4,6 +4,8 @@
     "description": "StayAhead website for scientific paper updates",
     "type": "module",
     "dependencies": {
-      "mongoose": "^5.12.3"
+        "csv-parse": "^5.5.6",
+        "csv-stringify": "^6.5.1",
+        "mongoose": "^5.12.3"
     }
-  }
+}

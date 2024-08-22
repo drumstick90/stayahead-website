@@ -538,6 +538,38 @@
             allowClear: true
         });
     });
+
+    document.addEventListener('DOMContentLoaded', function() {
+  const form = document.querySelector('.cta-form');
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const email = form.querySelector('input[type="email"]').value;
+    const areaOfInterest = document.getElementById('area-select').value;
+
+    try {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, areaOfInterest }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert('Thank you for registering!');
+        form.reset();
+      } else {
+        alert(`Error: ${data.error}`);
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      alert('An error occurred. Please try again.');
+    }
+  });
+});
 </script>
 
 </html>
