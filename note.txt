@@ -1,0 +1,17 @@
+
+
+lo script funziona
+
+bisogna lanciare il server php su 127.0.0.1:5500, tramite questi due comandi da terminale:
+pier@MBP-di-Pier ~ % cd /Users/pier/Coding/stayahead-website/
+pier@MBP-di-Pier stayahead-website % php -S 127.0.0.1:5500  
+
+prossime cose da fare:
+1. fixare front end (sistemare i campi in modalità desktop - in modalità mobile funzionano)
+2. sistemare ciò che viene stored nel emails.db (ok email e timestamp e area of interest, mentre il subfield mostra URL invece di semplice categoria)
+3. capire perchè restituisce messaggio di errore anche se invece funziona
+4. aggiungere opzione ALL a sub_interest
+
+Per interrogare il sqlite db:
+pier@MBP-di-Pier stayahead-website % sqlite3 emails.db
+SELECT * FROM emails ORDER BY id DESC LIMIT 5;
