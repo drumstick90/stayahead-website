@@ -184,83 +184,93 @@
             transition: transform 0.3s ease;
         }
         .cta-form-container {
-            margin: 20px 0;
-            width: 100%;
-        }
+        margin: 20px 0;
+        width: 100%;
+    }
+    .cta-form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .cta-form input[type="email"],
+    .cta-form select,
+    .cta-button {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+        height: 48px;
+    }
+    .cta-button {
+        font-weight: bold;
+        color: white;
+        background: linear-gradient(45deg, #007BFF, #00C9A7);
+        border: none;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+    }
+    .cta-button:hover,
+    .cta-button:focus {
+        opacity: 0.9;
+    }
+    .select2-container {
+        width: 100% !important;
+    }
+    .select2-selection--single {
+        height: 48px !important;
+        padding: 12px !important;
+        font-size: 16px !important;
+        line-height: 1.3 !important;
+        border: 1px solid #ddd !important;
+        border-radius: 4px !important;
+    }
+    .select2-selection__arrow {
+        height: 46px !important;
+    }
+    @media (min-width: 768px) {
         .cta-form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            flex-direction: row;
+            flex-wrap: wrap;
         }
-        .cta-form input[type="email"],
-        .cta-form select,
-        .cta-button {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-            height: 48px;
+        .cta-form input[type="email"] {
+            flex: 2;  /* Give more space to email field */
+            min-width: 200px;  /* Ensure a minimum width */
+        }
+        .cta-form select {
+            flex: 1.5;
+            min-width: 150px;  /* Ensure a minimum width */
         }
         .cta-button {
-            font-weight: bold;
-            color: white;
-            background: linear-gradient(45deg, #007BFF, #00C9A7);
-            border: none;
-            cursor: pointer;
-            transition: opacity 0.3s ease;
+            flex: 1;
+            min-width: 120px;  /* Ensure a minimum width */
         }
-        .cta-button:hover,
-        .cta-button:focus {
-            opacity: 0.9;
+    }
+    @media (min-width: 1200px) {
+        .cta-form {
+            flex-wrap: nowrap;
         }
-        .select2-container {
-            width: 100% !important;
+        .cta-form input[type="email"] {
+            flex: 2;
         }
-        .select2-selection--single {
-            height: 48px !important;
-            padding: 12px !important;
-            font-size: 16px !important;
-            line-height: 1.3 !important;
-            border: 1px solid #ddd !important;
-            border-radius: 4px !important;
+        .cta-form select {
+            flex: 1.5;
         }
-        .select2-selection__arrow {
-            height: 46px !important;
-        }
-        @media (min-width: 768px) {
-            .cta-form {
-                flex-direction: row;
-                flex-wrap: wrap;
-            }
-            .cta-form input[type="email"],
-            .cta-form select {
-                flex: 1;
-                min-width: 0;
-            }
-            .cta-button {
-                flex-basis: auto;
-            }
-        }
-        @media (min-width: 1200px) {
-            .cta-form {
-                flex-wrap: nowrap;
-            }
-            .cta-button {
-                width: auto;
-            }
-        }
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 3rem;
-            }
-            .hero p {
-                font-size: 1rem;
-            }
-            .nav-links {
-                display: none; /* Hide nav links on mobile, consider adding a mobile menu */
-            }
-        }
+        .cta-button {
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(45deg, #007BFF, #00C9A7);
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    line-height: 1;
+}
+    }
     </style>
 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -325,7 +335,7 @@
                     <option value="">Select sub-interest</option>
                     <!-- Options will be dynamically populated -->
                 </select>
-                <button type="submit" class="cta-button">Sign up for free!</button>
+                <button type="submit" class="cta-button">Try for free!</button>
             </form>
         </div>
 
@@ -455,7 +465,7 @@
             }
 
             try {
-                const response = await fetch('save_email.php', {
+                const response = await fetch('http://127.0.0.1:5500/public/save_email.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -473,9 +483,13 @@
                     alert(`Error: ${data.error}`);
                 }
             } catch (error) {
-                console.error('Submission error:', error);
-                alert('An error occurred. Please try again.');
-            }
+    console.error('Submission error:', error);
+    if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+        alert('Unable to connect to the server. Please check your internet connection and try again.');
+    } else {
+        alert(`An error occurred: ${error.message}. Please try again or contact support if the issue persists.`);
+    }
+}
         });
     
         // Initialize Select2 for dropdowns
