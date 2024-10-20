@@ -15,3 +15,12 @@ OK 1. fixare front end (sistemare i campi in modalità desktop - in modalità mo
 Per interrogare il sqlite db:
 pier@MBP-di-Pier stayahead-website % sqlite3 emails.db
 SELECT * FROM emails ORDER BY id DESC LIMIT 5;
+
+
+
+
+#### Droplet
+
+Accesso: pier@MacBook-Pro-di-Pier stayahead-website % ssh root@165.232.95.237
+la pas è la stessa che usava fagnani
+

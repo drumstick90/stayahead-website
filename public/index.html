@@ -3,307 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="StayAhead offers free weekly access to the top 10 research papers in your field. Join now to stay informed and ahead—at no cost.">
     <title>StayAhead! - Weekly Top Research Papers</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-image: url('Images/background.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: none;
-            background-color: rgba(255, 255, 255, 0.6);
-        }
-        body *:not(.overlay) {
-            position: relative;
-            z-index: 2;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-            font-weight: bold;
-            font-size: 1.5rem;
-        }
-        .logo img {
-            height: 30px;
-            margin-right: 10px;
-        }
-        .nav-links {
-            display: flex;
-            gap: 20px;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-        }
-        .hero {
-            text-align: center;
-            padding: 60px 0 0px;
-            position: relative;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: none;
-            z-index: 1;
-        }
-        .hero > * {
-            position: relative;
-            z-index: 2;
-        }
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            line-height: 1.1;
-        }
-        .hero p {
-            font-size: 1.2rem;
-            color: #000000;
-            max-width: 600px;
-            margin: 0 auto 15px;
-        }
-        .hero p:last-child {
-            margin-bottom: 20px;
-        }
-        .features {
-            padding: 10px 0 10px;
-        }
-        .features h2 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        .feature-box {
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            text-align: center;
-            border: 2px solid #000000;
-        }
-        .feature-box h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-        .feature-box p {
-            color: #666;
-        }
-        .scrolling-banner {
-            width: 100%;
-            overflow: hidden;
-            background-color: #f0f0f0;
-            padding: 15px 0;
-            margin: 20px 0;
-        }
-        .banner-content {
-            display: inline-block;
-            white-space: nowrap;
-            padding-right: 100%;
-            animation: scroll 60s linear infinite;
-        }
-        .banner-content span {
-            display: inline-block;
-            padding: 0 20px;
-            font-size: 18px;
-            color: #333;
-        }
-        @keyframes scroll {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-100%, 0, 0); }
-        }
-        .scrolling-banner:hover .banner-content {
-            animation-play-state: paused;
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        .fade-in-up { animation: fadeInUp 0.6s ease-out; }
-        .pulse { animation: pulse 2s infinite; }
-        .slide-in-left { animation: slideInLeft 0.6s ease-out; }
-        .stagger-fade-in > * {
-            opacity: 0;
-            animation: fadeInUp 0.6s ease-out forwards;
-        }
-        .stagger-fade-in > *:nth-child(1) { animation-delay: 0.1s; }
-        .stagger-fade-in > *:nth-child(2) { animation-delay: 0.2s; }
-        .stagger-fade-in > *:nth-child(3) { animation-delay: 0.3s; }
-        .stagger-fade-in > *:nth-child(4) { animation-delay: 0.4s; }
-        .stagger-fade-in > *:nth-child(5) { animation-delay: 0.5s; }
-        .stagger-fade-in > *:nth-child(6) { animation-delay: 0.6s; }
-        .feature-box:hover, .pricing-box:hover {
-            transform: translateY(-5px);
-            transition: transform 0.3s ease;
-        }
-        .cta-form-container {
-        margin: 20px 0;
-        width: 100%;
-    }
-    .cta-form {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-    .cta-form input[type="email"],
-    .cta-form select,
-    .cta-button {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-size: 16px;
-        height: 48px;
-    }
-    .cta-button {
-        font-weight: bold;
-        color: white;
-        background: linear-gradient(45deg, #007BFF, #00C9A7);
-        border: none;
-        cursor: pointer;
-        transition: opacity 0.3s ease;
-    }
-    .cta-button:hover,
-    .cta-button:focus {
-        opacity: 0.9;
-    }
-    .select2-container {
-        width: 100% !important;
-    }
-    .select2-selection--single {
-        height: 48px !important;
-        padding: 12px !important;
-        font-size: 16px !important;
-        line-height: 1.3 !important;
-        border: 1px solid #ddd !important;
-        border-radius: 4px !important;
-    }
-    .select2-selection__arrow {
-        height: 46px !important;
-    }
-    @media (min-width: 768px) {
-        .cta-form {
-            flex-direction: row;
-            flex-wrap: wrap;
-        }
-        .cta-form input[type="email"] {
-            flex: 2;  /* Give more space to email field */
-            min-width: 200px;  /* Ensure a minimum width */
-        }
-        .cta-form select {
-            flex: 1.5;
-            min-width: 150px;  /* Ensure a minimum width */
-        }
-        .cta-button {
-            flex: 1;
-            min-width: 120px;  /* Ensure a minimum width */
-        }
-    }
-    @media (min-width: 1200px) {
-        .cta-form {
-            flex-wrap: nowrap;
-        }
-        .cta-form input[type="email"] {
-            flex: 2;
-        }
-        .cta-form select {
-            flex: 1.5;
-        }
-        .cta-button {
-    font-weight: bold;
-    color: white;
-    background: linear-gradient(45deg, #007BFF, #00C9A7);
-    border: none;
-    cursor: pointer;
-    transition: opacity 0.3s ease;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 20px;
-    line-height: 1;
-}
-    }
-    </style>
-
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <div class="overlay">
-    </div>
+    <div class="overlay"></div>
 
     <div class="container">
         <nav>
             <div class="logo slide-in-left">
-                <img src="Images/logo.svg">
+                <img src="Images/logo.svg" alt="StayAhead Logo">
                 StayAhead
             </div>
             <div class="nav-links stagger-fade-in">
-                <a href="#">Features</a>
-                <a href="#">Pricing</a>
-                <a href="#">Testimonials</a>
-                <a href="#">FAQ</a>
-                <a href="#">About</a>
-                <a href="#">Blog</a>
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#faq">FAQ</a>
             </div>
         </nav>
 
         <section class="hero">
-            <h1 class="fade-in-up">StayAhead! of Your Field</h1>
-            <p class="fade-in-up" style="animation-delay: 0.2s;">Don't waste <strong>hours</strong> scrolling through useless scientific papers. </p>
-            <p class="fade-in-up" style="animation-delay: 0.4s;">Read only the <strong>most talked about</strong> ones.</p>
-            <p class="fade-in-up" style="animation-delay: 0.8s;"> Just at <strong>1 </strong> $ per week  .</p>
-        </section>
+    <h1 class="fade-in-up">StayAhead! in Your Field — For Free</h1>
+    <p class="fade-in-up" style="animation-delay: 0.2s;">Cut through the noise - the ten most influential studies, delivered.</p>
+    <p class="fade-in-up" style="animation-delay: 0.4s;">No cost, no hassle—just valuable insights straight to your inbox.</p>
+  
+</section>
+  
+        
 
         <div class="cta-form-container">
             <form class="cta-form">
@@ -335,11 +65,11 @@
                     <option value="">Select sub-interest</option>
                     <!-- Options will be dynamically populated -->
                 </select>
-                <button type="submit" class="cta-button">Try for free!</button>
+                <button type="submit" class="cta-button">Join for free!</button>
             </form>
         </div>
 
-        <section class="features">
+        <section id="features" class="features">
             <div class="container">
                 <div class="features-grid stagger-fade-in">
                     <div class="feature-box">
@@ -348,21 +78,21 @@
                     </div>
                     <div class="feature-box">
                         <h3>Easy Access</h3>
-                        <p>Delivered directly to your inbox, every week or every fortnight.</p>
+                        <p>Delivered directly to your inbox every week—completely free.</p>
                     </div>
                     <div class="feature-box">
-                        <h3>Affordable Pricing</h3>
-                        <p>High-value information at a low cost of just $1 per week.</p>
+                        <h3>100% Free</h3>
+                        <p>Empowering you with high-value information at no cost.</p>
                     </div>
+                    
+                 
                 </div>
             </div>
         </section>
-
-       
     </div>
 
     <section class="scrolling-banner">
-        <div class="banner-content ">
+        <div class="banner-content">
             <span>Agricultural Sciences</span>
             <span>Arts & Humanities</span>
             <span>Biology & Biochemistry</span>
@@ -386,122 +116,254 @@
         </div>
     </section>
 
-</body>
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Select Your Field</h3>
+                    <p>Choose your area of interest and sub-category</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Sign Up</h3>
+                    <p>Register with your email address</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <h3>Receive Updates</h3>
+                    <p>Get weekly curated lists of top 10 trending papers</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Stay Ahead</h3>
+                    <p>Keep up with cutting-edge research effortlessly</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script>
-    $(document).ready(function() {
-        const form = document.querySelector('.cta-form');
-        const emailInput = document.getElementById('email-input');
-        const interestSelect = document.getElementById('interest-select');
-        const subInterestSelect = document.getElementById('sub-interest-select');
-    
-        let fieldsAndCategories;
-    
-        // Load the JSON data
-        $.getJSON('fields_and_categories.json', function(data) {
-            fieldsAndCategories = data;
-            populateInterestSelect();
-            console.log("JSON data loaded:", fieldsAndCategories);
-        }).fail(function() {
-            console.error("Failed to load the JSON file");
-            alert("There was an error loading the form data. Please try refreshing the page.");
-        });
-    
-        function populateInterestSelect() {
-            interestSelect.innerHTML = '<option value="">Select your main area of interest</option>';
-            for (const field in fieldsAndCategories) {
-                const option = document.createElement('option');
-                option.value = field;
-                option.textContent = field;
-                interestSelect.appendChild(option);
-            }
-            $(interestSelect).trigger('change');
-            console.log("Interest select populated");
-        }
-    
-        function updateSubInterests() {
-            console.log("updateSubInterests called");
-            const selectedInterest = interestSelect.value;
-            console.log("Selected interest:", selectedInterest);
-            
-            subInterestSelect.innerHTML = '<option value="">Select sub-interest</option>';
-    
-            if (selectedInterest && fieldsAndCategories[selectedInterest]) {
-                const categories = fieldsAndCategories[selectedInterest].categories;
-                console.log("Categories for selected interest:", categories);
-                for (const [categoryName, categoryValue] of Object.entries(categories)) {
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2>What Our Users Say</h2>
+            <div class="testimonial">
+                <p>"StayAhead has revolutionized how I keep up with research in my field. It's an invaluable time-saver!"</p>
+                - Dr. Jane Smith, Neuroscientist
+            </div>
+            <div class="testimonial">
+                <p>"As a grad student, this service helps me stay on top of the latest developments without spending hours searching."</p>
+                - Mike Johnson, Ph.D. Candidate
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        How are the top papers selected?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We use a combination of citation metrics, social media mentions, and expert curation to identify the most impactful and trending papers in each field.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Can I change my area of interest?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, you can update your preferences at any time through your account settings.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        How is this service free?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We believe in making knowledge accessible to all. We aim to be supported by non-intrusive revenue models - e.g. sponsorships, partnerships.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>About StayAhead</h3>
+            <p>StayAhead delivers curated research papers to keep you at the forefront of your field. Stay informed, save time, and accelerate your research.</p>
+          </div>
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#how-it-works">How It Works</a></li>
+           
+              <li><a href="#faq">FAQ</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Legal</h3>
+            <ul>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Cookie Policy</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Newsletter</h3>
+            <p>Subscribe to our newsletter for the latest updates and offers.</p>
+            <form class="footer-form">
+              <input type="email" placeholder="Enter your email" required>
+              <button type="submit" class="cta-button">Join Now for Free</button>
+
+            </form>
+          </div>
+        </div>
+        <div class="footer-bottom">
+         
+          <p>&copy; 2023 StayAhead. All rights reserved.</p>
+        </div>
+      </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const form = document.querySelector('.cta-form');
+            const emailInput = document.getElementById('email-input');
+            const interestSelect = document.getElementById('interest-select');
+            const subInterestSelect = document.getElementById('sub-interest-select');
+        
+            let fieldsAndCategories;
+        
+            // Load the JSON data
+            $.getJSON('fields_and_categories.json', function(data) {
+                fieldsAndCategories = data;
+                populateInterestSelect();
+                console.log("JSON data loaded:", fieldsAndCategories);
+            }).fail(function() {
+                console.error("Failed to load the JSON file");
+                alert("There was an error loading the form data. Please try refreshing the page.");
+            });
+        
+            function populateInterestSelect() {
+                interestSelect.innerHTML = '<option value="">Select your main area of interest</option>';
+                for (const field in fieldsAndCategories) {
                     const option = document.createElement('option');
-                    option.value = categoryValue;
-                    option.textContent = categoryName;
-                    subInterestSelect.appendChild(option);
+                    option.value = field;
+                    option.textContent = field;
+                    interestSelect.appendChild(option);
                 }
-                subInterestSelect.disabled = false;
-            } else {
-                subInterestSelect.disabled = true;
+                $(interestSelect).trigger('change');
+                console.log("Interest select populated");
             }
-            $(subInterestSelect).trigger('change');
-            console.log("Sub-interest select updated");
-        }
-    
-        // Add event listener to interest select
-        $(interestSelect).on('change', function() {
-            console.log("Interest select changed");
-            updateSubInterests();
-        });
-    
-        // Form submission
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const email = emailInput.value;
-            const interest = interestSelect.value;
-            const subInterest = subInterestSelect.value;
-
-            if (!email || !interest || !subInterest) {
-                alert('Please fill in all fields.');
-                return;
-            }
-
-            try {
-                const response = await fetch('http://127.0.0.1:5500/public/save_email.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ email, interest, subInterest }),
-                });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    alert(`Thank you for registering! We'll send you the best papers in ${interest} - ${subInterest}.`);
-                    form.reset();
-                    updateSubInterests(); // Reset sub-interest dropdown
+        
+            function updateSubInterests() {
+                console.log("updateSubInterests called");
+                const selectedInterest = interestSelect.value;
+                console.log("Selected interest:", selectedInterest);
+                
+                subInterestSelect.innerHTML = '<option value="">Select sub-interest</option>';
+        
+                if (selectedInterest && fieldsAndCategories[selectedInterest]) {
+                    const categories = fieldsAndCategories[selectedInterest].categories;
+                    console.log("Categories for selected interest:", categories);
+                    for (const [categoryName, categoryValue] of Object.entries(categories)) {
+                        const option = document.createElement('option');
+                        option.value = categoryValue;
+                        option.textContent = categoryName;
+                        subInterestSelect.appendChild(option);
+                    }
+                    subInterestSelect.disabled = false;
                 } else {
-                    alert(`Error: ${data.error}`);
+                    subInterestSelect.disabled = true;
                 }
-            } catch (error) {
-    console.error('Submission error:', error);
-    if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
-        alert('Unable to connect to the server. Please check your internet connection and try again.');
-    } else {
-        alert(`An error occurred: ${error.message}. Please try again or contact support if the issue persists.`);
-    }
-}
+                $(subInterestSelect).trigger('change');
+                console.log("Sub-interest select updated");
+            }
+        
+            // Add event listener to interest select
+            $(interestSelect).on('change', function() {
+                console.log("Interest select changed");
+                updateSubInterests();
+            });
+        
+            // Form submission
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const email = emailInput.value;
+                const interest = interestSelect.value;
+                const subInterest = subInterestSelect.value;
+
+                if (!email || !interest || !subInterest) {
+                    alert('Please fill in all fields.');
+                    return;
+                }
+
+                try {
+                    const response = await fetch('http://127.0.0.1:5500/public/save_email.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ email, interest, subInterest }),
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        alert(`Thank you for registering! We'll send you the best papers in ${interest} - ${subInterest}.`);
+                        form.reset();
+                        updateSubInterests(); // Reset sub-interest dropdown
+                    } else {
+                        alert(`Error: ${data.error}`);
+                    }
+                } catch (error) {
+                    console.error('Submission error:', error);
+                    if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+                        alert('Unable to connect to the server. Please check your internet connection and try again.');
+                    } else {
+                        alert(`An error occurred: ${error.message}. Please try again or contact support if the issue persists.`);
+                    }
+                }
+            });
+        
+            // Initialize Select2 for dropdowns
+            $('#interest-select, #sub-interest-select').select2({
+                placeholder: "Select an option",
+                allowClear: true
+            });
+        
+            // Disable sub-interest select initially
+            subInterestSelect.disabled = true;
+
+            // FAQ dropdown functionality
+            document.querySelectorAll('.faq-question').forEach(button => {
+                button.addEventListener('click', () => {
+                    const faqItem = button.parentElement;
+                    faqItem.classList.toggle('active');
+                    const icon = button.querySelector('i');
+                    icon.classList.toggle('fa-chevron-down');
+                    icon.classList.toggle('fa-chevron-up');
+                });
+            });
         });
-    
-        // Initialize Select2 for dropdowns
-        $('#interest-select, #sub-interest-select').select2({
-            placeholder: "Select an option",
-            allowClear: true
-        });
-    
-        // Disable sub-interest select initially
-        subInterestSelect.disabled = true;
-    });
     </script>
-
-
+</body>
 </html>

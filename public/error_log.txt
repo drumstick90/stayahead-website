@@ -9,3 +9,4 @@
 [05-Sep-2024 06:24:56 UTC] PHP Warning:  Trying to access array offset on null in /Users/pier/Coding/stayahead-website/public/save_email.php on line 35
 [05-Sep-2024 06:24:56 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /Users/pier/Coding/stayahead-website/public/save_email.php on line 35
 [05-Sep-2024 06:25:08 UTC] Script started
+[05-Sep-2024 07:18:14 UTC] Script started
