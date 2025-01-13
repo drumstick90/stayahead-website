@@ -1,0 +1,12 @@
+[05-Sep-2024 06:13:06 UTC] Script started
+[05-Sep-2024 06:13:06 UTC] PHP Deprecated:  Constant FILTER_SANITIZE_STRING is deprecated in /Users/pier/Coding/stayahead-website/public/save_email.php on line 44
+[05-Sep-2024 06:13:06 UTC] PHP Deprecated:  Constant FILTER_SANITIZE_STRING is deprecated in /Users/pier/Coding/stayahead-website/public/save_email.php on line 45
+[05-Sep-2024 06:13:06 UTC] PHP Deprecated:  parse_str(): Passing null to parameter #1 ($string) of type string is deprecated in /Users/pier/Coding/stayahead-website/public/save_email.php on line 49
+[05-Sep-2024 06:16:12 UTC] Script started
+[05-Sep-2024 06:24:56 UTC] Script started
+[05-Sep-2024 06:24:56 UTC] PHP Warning:  Undefined variable $jsonData in /Users/pier/Coding/stayahead-website/public/save_email.php on line 35
+[05-Sep-2024 06:24:56 UTC] PHP Warning:  Trying to access array offset on null in /Users/pier/Coding/stayahead-website/public/save_email.php on line 35
+[05-Sep-2024 06:24:56 UTC] PHP Warning:  Trying to access array offset on null in /Users/pier/Coding/stayahead-website/public/save_email.php on line 35
+[05-Sep-2024 06:24:56 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /Users/pier/Coding/stayahead-website/public/save_email.php on line 35
+[05-Sep-2024 06:25:08 UTC] Script started
+[05-Sep-2024 07:18:14 UTC] Script started
