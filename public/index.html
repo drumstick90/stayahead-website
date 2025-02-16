@@ -1,376 +1,340 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="StayAhead offers free weekly access to the top 10 research papers in your field. Join now to stay informed and ahead—at no cost.">
-    <title>StayAhead! - Weekly Top Research Papers</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="StayAhead offers free weekly access to the top 10 research papers in your field. Join now to stay informed and ahead—at no cost.">
+  <title>StayAhead! - Weekly Top Research Papers</title>
+  <!-- Using relative paths for assets -->
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <div class="overlay"></div>
+  <div class="overlay"></div>
+  <div class="container">
+    <nav>
+      <div class="logo slide-in-left">
+        <img src="Images/logo.svg" alt="StayAhead Logo">
+        StayAhead
+      </div>
+      <div class="nav-links stagger-fade-in">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </nav>
 
-    <div class="container">
-        <nav>
-            <div class="logo slide-in-left">
-                <img src="Images/logo.svg" alt="StayAhead Logo">
-                StayAhead
-            </div>
-            <div class="nav-links stagger-fade-in">
-                <a href="#features">Features</a>
-                <a href="#how-it-works">How It Works</a>
-                <a href="#testimonials">Testimonials</a>
-                <a href="#faq">FAQ</a>
-            </div>
-        </nav>
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1 class="fade-in-up">StayAhead! in Your Field — For Free</h1>
+      <p class="fade-in-up" style="animation-delay: 0.2s;">
+        Cut through the noise – discover the ten most influential studies delivered straight to your inbox.
+      </p>
+      <p class="fade-in-up" style="animation-delay: 0.4s;">
+        No cost, no hassle—just valuable insights every week.
+      </p>
+    </section>
 
-        <section class="hero">
-    <h1 class="fade-in-up">StayAhead! in Your Field — For Free</h1>
-    <p class="fade-in-up" style="animation-delay: 0.2s;">Cut through the noise - the ten most influential studies, delivered.</p>
-    <p class="fade-in-up" style="animation-delay: 0.4s;">No cost, no hassle—just valuable insights straight to your inbox.</p>
-  
-</section>
-  
-        
-
-        <div class="cta-form-container">
-            <form class="cta-form">
-                <input type="email" id="email-input" placeholder="you@example.com" required>
-                <select id="interest-select" required>
-                    <option value="">Select your main area of interest</option>
-                    <option value="Agricultural Sciences">Agricultural Sciences</option>
-                    <option value="Arts & Humanities">Arts & Humanities</option>
-                    <option value="Biology & Biochemistry">Biology & Biochemistry</option>
-                    <option value="Chemistry">Chemistry</option>
-                    <option value="Clinical Medicine">Clinical Medicine</option>
-                    <option value="Computer Science">Computer Science</option>
-                    <option value="Economics & Business">Economics & Business</option>
-                    <option value="Engineering">Engineering</option>
-                    <option value="Environment and Ecology">Environment and Ecology</option>
-                    <option value="Geosciences">Geosciences</option>
-                    <option value="History & Archaeology">History & Archaeology</option>
-                    <option value="Literature & Language">Literature & Language</option>
-                    <option value="Materials Science">Materials Science</option>
-                    <option value="Mathematics">Mathematics</option>
-                    <option value="Philosophy & Religion">Philosophy & Religion</option>
-                    <option value="Physics">Physics</option>
-                    <option value="Plant & Animal Science">Plant & Animal Science</option>
-                    <option value="Psychiatry and Psychology">Psychiatry and Psychology</option>
-                    <option value="Social Sciences">Social Sciences</option>
-                    <option value="Visual & Performing Arts">Visual & Performing Arts</option>
-                </select>
-                <select id="sub-interest-select" required>
-                    <option value="">Select sub-interest</option>
-                    <!-- Options will be dynamically populated -->
-                </select>
-                <button type="submit" class="cta-button">Join for free!</button>
-            </form>
-        </div>
-
-        <section id="features" class="features">
-            <div class="container">
-                <div class="features-grid stagger-fade-in">
-                    <div class="feature-box">
-                        <h3>Field-Specific</h3>
-                        <p>The top 10 trending papers in your niche, ensuring relevance to your work.</p>
-                    </div>
-                    <div class="feature-box">
-                        <h3>Easy Access</h3>
-                        <p>Delivered directly to your inbox every week—completely free.</p>
-                    </div>
-                    <div class="feature-box">
-                        <h3>100% Free</h3>
-                        <p>Empowering you with high-value information at no cost.</p>
-                    </div>
-                    
-                 
-                </div>
-            </div>
-        </section>
+    <!-- Call-to-Action Form -->
+    <div class="cta-form-container" id="signup-form">
+      <form class="cta-form">
+        <input type="email" id="email-input" placeholder="you@example.com" required>
+        <select id="interest-select" required>
+          <option value="">Select your main area of interest</option>
+          <option value="Agricultural Sciences">Agricultural Sciences</option>
+          <option value="Arts & Humanities">Arts & Humanities</option>
+          <option value="Biology & Biochemistry">Biology & Biochemistry</option>
+          <option value="Chemistry">Chemistry</option>
+          <option value="Clinical Medicine">Clinical Medicine</option>
+          <option value="Computer Science">Computer Science</option>
+          <option value="Economics & Business">Economics & Business</option>
+          <option value="Engineering">Engineering</option>
+          <option value="Environment and Ecology">Environment and Ecology</option>
+          <option value="Geosciences">Geosciences</option>
+          <option value="History & Archaeology">History & Archaeology</option>
+          <option value="Literature & Language">Literature & Language</option>
+          <option value="Materials Science">Materials Science</option>
+          <option value="Mathematics">Mathematics</option>
+          <option value="Philosophy & Religion">Philosophy & Religion</option>
+          <option value="Physics">Physics</option>
+          <option value="Plant & Animal Science">Plant & Animal Science</option>
+          <option value="Psychiatry and Psychology">Psychiatry and Psychology</option>
+          <option value="Social Sciences">Social Sciences</option>
+          <option value="Visual & Performing Arts">Visual & Performing Arts</option>
+        </select>
+        <select id="sub-interest-select" required>
+          <option value="">Select sub-interest</option>
+          <!-- Options will be dynamically populated -->
+        </select>
+        <button type="submit" class="cta-button">Join for free!</button>
+      </form>
     </div>
 
+    <!-- Features Section -->
+    <section id="features" class="features">
+      <div class="container">
+        <div class="features-grid stagger-fade-in">
+          <div class="feature-box">
+            <h3>Field-Specific</h3>
+            <p>Receive the top 10 trending papers relevant to your niche.</p>
+          </div>
+          <div class="feature-box">
+            <h3>Easy Access</h3>
+            <p>Get insights delivered directly to your inbox—every week.</p>
+          </div>
+          <div class="feature-box">
+            <h3>100% Free</h3>
+            <p>High-value research, at zero cost.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scrolling Banner -->
     <section class="scrolling-banner">
-        <div class="banner-content" id="banner-content">
-            <span>Agricultural Sciences</span>
-            <span>Arts & Humanities</span>
-            <span>Biology & Biochemistry</span>
-            <span>Chemistry</span>
-            <span>Clinical Medicine</span>
-            <span>Computer Science</span>
-            <span>Economics & Business</span>
-            <span>Engineering</span>
-            <span>Environment and Ecology</span>
-            <span>Geosciences</span>
-            <span>History & Archaeology</span>
-            <span>Literature & Language</span>
-            <span>Materials Science</span>
-            <span>Mathematics</span>
-            <span>Philosophy & Religion</span>
-            <span>Physics</span>
-            <span>Plant & Animal Science</span>
-            <span>Psychiatry and Psychology</span>
-            <span>Social Sciences</span>
-            <span>Visual & Performing Arts</span>
-        </div>
+      <div class="banner-content" id="banner-content">
+        <span>Agricultural Sciences</span>
+        <span>Arts & Humanities</span>
+        <span>Biology & Biochemistry</span>
+        <span>Chemistry</span>
+        <span>Clinical Medicine</span>
+        <span>Computer Science</span>
+        <span>Economics & Business</span>
+        <span>Engineering</span>
+        <span>Environment and Ecology</span>
+        <span>Geosciences</span>
+        <span>History & Archaeology</span>
+        <span>Literature & Language</span>
+        <span>Materials Science</span>
+        <span>Mathematics</span>
+        <span>Philosophy & Religion</span>
+        <span>Physics</span>
+        <span>Plant & Animal Science</span>
+        <span>Psychiatry and Psychology</span>
+        <span>Social Sciences</span>
+        <span>Visual & Performing Arts</span>
+      </div>
     </section>
 
+    <!-- How It Works Section -->
     <section id="how-it-works" class="how-it-works">
-        <div class="container">
-            <h2>How It Works</h2>
-            <div class="steps-container">
-                <div class="step">
-                    <div class="step-icon">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <h3>Select Your Field</h3>
-                    <p>Choose your area of interest and sub-category</p>
-                </div>
-                <div class="step">
-                    <div class="step-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <h3>Sign Up</h3>
-                    <p>Register with your email address</p>
-                </div>
-                <div class="step">
-                    <div class="step-icon">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <h3>Receive Updates</h3>
-                    <p>Get weekly curated lists of top 10 trending papers</p>
-                </div>
-                <div class="step">
-                    <div class="step-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Stay Ahead</h3>
-                    <p>Keep up with cutting-edge research effortlessly</p>
-                </div>
-            </div>
+      <div class="container">
+        <h2>How It Works</h2>
+        <div class="steps-container">
+          <div class="step">
+            <div class="step-icon"><i class="fas fa-search"></i></div>
+            <h3>Select Your Field</h3>
+            <p>Choose your area of interest and sub-category.</p>
+          </div>
+          <div class="step">
+            <div class="step-icon"><i class="fas fa-envelope"></i></div>
+            <h3>Sign Up</h3>
+            <p>Register with your email address.</p>
+          </div>
+          <div class="step">
+            <div class="step-icon"><i class="fas fa-newspaper"></i></div>
+            <h3>Receive Updates</h3>
+            <p>Get a weekly curated list of top research papers.</p>
+          </div>
+          <div class="step">
+            <div class="step-icon"><i class="fas fa-chart-line"></i></div>
+            <h3>Stay Ahead</h3>
+            <p>Keep up with cutting-edge research effortlessly.</p>
+          </div>
         </div>
+      </div>
     </section>
 
+    <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials">
-        <div class="container">
-            <h2>What Our Users Say</h2>
-            <div class="testimonial">
-                <p>"StayAhead has revolutionized how I keep up with research in my field. It's an invaluable time-saver!"</p>
-                - Dr. Jane Smith, Neuroscientist
-            </div>
-            <div class="testimonial">
-                <p>"As a grad student, this service helps me stay on top of the latest developments without spending hours searching."</p>
-                - Mike Johnson, Ph.D. Candidate
-            </div>
+      <div class="container">
+        <h2>What Our Users Say</h2>
+        <div class="testimonial">
+          <p>"StayAhead has revolutionized how I keep up with research in my field. It's an invaluable time-saver!"</p>
+          - Dr. Jane Smith, Neuroscientist
         </div>
+        <div class="testimonial">
+          <p>"This service helps me stay on top of the latest developments without spending hours searching."</p>
+          - Mike Johnson, Ph.D. Candidate
+        </div>
+      </div>
     </section>
 
+    <!-- FAQ Section -->
     <section id="faq" class="faq">
-        <div class="container">
-            <h2>Frequently Asked Questions</h2>
-            <div class="faq-list">
-                <div class="faq-item">
-                    <button class="faq-question">
-                        How are the top papers selected?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>We use a combination of citation metrics, social media mentions, and expert curation to identify the most impactful and trending papers in each field.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Can I change my area of interest?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Yes, you can update your preferences at any time through your account settings.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">
-                        How is this service free?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>We believe in making knowledge accessible to all. We aim to be supported by non-intrusive revenue models - e.g. sponsorships, partnerships.</p>
-                    </div>
-                </div>
+      <div class="container">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              How are the top papers selected?
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>We combine citation metrics, social media mentions, and expert curation to identify the most impactful papers.</p>
             </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              Can I change my area of interest?
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Yes, you can update your preferences at any time in your account settings.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              How is this service free?
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>We believe in making knowledge accessible to all. Our revenue comes from non-intrusive sponsorships and partnerships.</p>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
+    <!-- Footer Section -->
     <footer class="site-footer">
-        <div class="footer-content">
-          <div class="footer-section">
-            <h3>About StayAhead</h3>
-            <p>StayAhead delivers curated research papers to keep you at the forefront of your field. Stay informed, save time, and accelerate your research.</p>
-          </div>
-          <div class="footer-section">
-            <h3>Quick Links</h3>
-            <ul>
-              <li><a href="#features">Features</a></li>
-              <li><a href="#how-it-works">How It Works</a></li>
-           
-              <li><a href="#faq">FAQ</a></li>
-            </ul>
-          </div>
-          <div class="footer-section">
-            <h3>Legal</h3>
-            <ul>
-              <li><a href="#">Terms of Service</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Cookie Policy</a></li>
-            </ul>
-          </div>
-          <div class="footer-section">
-            <h3>Newsletter</h3>
-            <p>Subscribe to our newsletter for the latest updates and offers.</p>
-            <form class="footer-form">
-              <input type="email" placeholder="Enter your email" required>
-              <button type="submit" class="cta-button">Join Now for Free</button>
-
-            </form>
-          </div>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>About StayAhead</h3>
+          <p>StayAhead delivers curated research papers to keep you informed and ahead in your field.</p>
         </div>
-        <div class="footer-bottom">
-         
-          <p>&copy; 2023 StayAhead. All rights reserved.</p>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
         </div>
-      </footer>
+        <div class="footer-section">
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Newsletter</h3>
+          <p>Subscribe to our newsletter for the latest updates and offers.</p>
+          <form class="footer-form">
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit" class="cta-button">Join Now for Free</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 StayAhead. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            const form = document.querySelector('.cta-form');
-            const emailInput = document.getElementById('email-input');
-            const interestSelect = document.getElementById('interest-select');
-            const subInterestSelect = document.getElementById('sub-interest-select');
-        
-            let fieldsAndCategories;
-        
-            // Load the JSON data
-            $.getJSON('fields_and_categories.json', function(data) {
-                fieldsAndCategories = data;
-                populateInterestSelect();
-                console.log("JSON data loaded:", fieldsAndCategories);
-            }).fail(function() {
-                console.error("Failed to load the JSON file");
-                alert("There was an error loading the form data. Please try refreshing the page.");
-            });
-        
-            function populateInterestSelect() {
-                interestSelect.innerHTML = '<option value="">Select your main area of interest</option>';
-                for (const field in fieldsAndCategories) {
-                    const option = document.createElement('option');
-                    option.value = field;
-                    option.textContent = field;
-                    interestSelect.appendChild(option);
-                }
-                $(interestSelect).trigger('change');
-                console.log("Interest select populated");
-            }
-        
-            function updateSubInterests() {
-                console.log("updateSubInterests called");
-                const selectedInterest = interestSelect.value;
-                console.log("Selected interest:", selectedInterest);
-                
-                subInterestSelect.innerHTML = '<option value="">Select sub-interest</option>';
-        
-                if (selectedInterest && fieldsAndCategories[selectedInterest]) {
-                    const categories = fieldsAndCategories[selectedInterest].categories;
-                    console.log("Categories for selected interest:", categories);
-                    for (const [categoryName, categoryValue] of Object.entries(categories)) {
-                        const option = document.createElement('option');
-                        option.value = categoryValue;
-                        option.textContent = categoryName;
-                        subInterestSelect.appendChild(option);
-                    }
-                    subInterestSelect.disabled = false;
-                } else {
-                    subInterestSelect.disabled = true;
-                }
-                $(subInterestSelect).trigger('change');
-                console.log("Sub-interest select updated");
-            }
-        
-            // Add event listener to interest select
-            $(interestSelect).on('change', function() {
-                console.log("Interest select changed");
-                updateSubInterests();
-            });
-        
-            // Form submission
-            form.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                
-                const email = emailInput.value;
-                const interest = interestSelect.value;
-                const subInterest = subInterestSelect.value;
-
-                if (!email || !interest || !subInterest) {
-                    alert('Please fill in all fields.');
-                    return;
-                }
-
-                try {
-                    const response = await fetch('http://127.0.0.1:5500/public/save_email.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ email, interest, subInterest }),
-                    });
-
-                    const data = await response.json();
-
-                    if (data.success) {
-                        alert(`Thank you for registering! We'll send you the best papers in ${interest} - ${subInterest}.`);
-                        form.reset();
-                        updateSubInterests(); // Reset sub-interest dropdown
-                    } else {
-                        alert(`Error: ${data.error}`);
-                    }
-                } catch (error) {
-                    console.error('Submission error:', error);
-                    if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
-                        alert('Unable to connect to the server. Please check your internet connection and try again.');
-                    } else {
-                        alert(`An error occurred: ${error.message}. Please try again or contact support if the issue persists.`);
-                    }
-                }
-            });
-        
-            // Initialize Select2 for dropdowns
-            $('#interest-select, #sub-interest-select').select2({
-                placeholder: "Select an option",
-                allowClear: true
-            });
-        
-            // Disable sub-interest select initially
-            subInterestSelect.disabled = true;
-
-            // FAQ dropdown functionality
-            document.querySelectorAll('.faq-question').forEach(button => {
-                button.addEventListener('click', () => {
-                    const faqItem = button.parentElement;
-                    faqItem.classList.toggle('active');
-                    const icon = button.querySelector('i');
-                    icon.classList.toggle('fa-chevron-down');
-                    icon.classList.toggle('fa-chevron-up');
-                });
-            });
+  <!-- JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      const form = document.querySelector('.cta-form');
+      const emailInput = document.getElementById('email-input');
+      const interestSelect = document.getElementById('interest-select');
+      const subInterestSelect = document.getElementById('sub-interest-select');
+      
+      let fieldsAndCategories;
+      
+      // Load the JSON data for dynamic dropdown population
+      $.getJSON('fields_and_categories.json', function(data) {
+        fieldsAndCategories = data;
+        populateInterestSelect();
+      }).fail(function() {
+        alert("Error loading form data. Please refresh the page.");
+      });
+      
+      function populateInterestSelect() {
+        interestSelect.innerHTML = '<option value="">Select your main area of interest</option>';
+        for (const field in fieldsAndCategories) {
+          const option = document.createElement('option');
+          option.value = field;
+          option.textContent = field;
+          interestSelect.appendChild(option);
+        }
+        $(interestSelect).trigger('change');
+      }
+      
+      function updateSubInterests() {
+        const selectedInterest = interestSelect.value;
+        subInterestSelect.innerHTML = '<option value="">Select sub-interest</option>';
+        if (selectedInterest && fieldsAndCategories[selectedInterest]) {
+          const categories = fieldsAndCategories[selectedInterest].categories;
+          for (const [categoryName, categoryValue] of Object.entries(categories)) {
+            const option = document.createElement('option');
+            option.value = categoryValue;
+            option.textContent = categoryName;
+            subInterestSelect.appendChild(option);
+          }
+          subInterestSelect.disabled = false;
+        } else {
+          subInterestSelect.disabled = true;
+        }
+        $(subInterestSelect).trigger('change');
+      }
+      
+      $(interestSelect).on('change', function() {
+        updateSubInterests();
+      });
+      
+      // Form submission: updated to use a relative URL for save_email.php
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = emailInput.value;
+        const interest = interestSelect.value;
+        const subInterest = subInterestSelect.value;
+        if (!email || !interest || !subInterest) {
+          alert('Please fill in all fields.');
+          return;
+        }
+        try {
+          const response = await fetch('./save_email.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, interest, subInterest }),
+          });
+          const data = await response.json();
+          if (data.success) {
+            alert(`Thank you for registering! We'll send you the best papers in ${interest} - ${subInterest}.`);
+            form.reset();
+            updateSubInterests();
+          } else {
+            alert(`Error: ${data.error}`);
+          }
+        } catch (error) {
+          alert(`Submission error: ${error.message}`);
+        }
+      });
+      
+      $('#interest-select, #sub-interest-select').select2({
+        placeholder: "Select an option",
+        allowClear: true
+      });
+      
+      subInterestSelect.disabled = true;
+      
+      document.querySelectorAll('.faq-question').forEach(button => {
+        button.addEventListener('click', () => {
+          const faqItem = button.parentElement;
+          faqItem.classList.toggle('active');
+          const icon = button.querySelector('i');
+          icon.classList.toggle('fa-chevron-down');
+          icon.classList.toggle('fa-chevron-up');
         });
-
-
- 
-
-   
-
-        
-    </script>
+      });
+    });
+  </script>
 </body>
 </html>

@@ -1,83 +1,99 @@
 <?php
-header('Content-Type: application/json');
-header("Access-Control-Allow-Origin: http://127.0.0.1:5500");
-header("Access-Control-Allow-Headers: Content-Type");
+// save_email.php
+// This script processes incoming JSON data, sanitizes it, saves customer email and preferences into customers.db,
+// and returns a proper JSON response.
 
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    header("Access-Control-Allow-Methods: POST, OPTIONS");
-    header("Access-Control-Allow-Headers: Content-Type");
-    exit(0);
+// Disable error display for production; errors will be logged.
+ini_set('display_errors', 0);
+error_reporting(E_ALL);
+
+// Set response header to JSON.
+header('Content-Type: application/json');
+
+// Retrieve the raw POST input.
+$rawData = file_get_contents("php://input");
+if (!$rawData) {
+    error_log("No input received in save_email.php");
+    echo json_encode(["success" => false, "error" => "No input received."]);
+    exit;
+}
+
+// Decode the JSON input.
+$data = json_decode($rawData, true);
+if (json_last_error() !== JSON_ERROR_NONE) {
+    error_log("JSON decode error in save_email.php: " . json_last_error_msg());
+    echo json_encode(["success" => false, "error" => "Invalid JSON input."]);
+    exit;
+}
+
+// Retrieve and trim input values.
+$email = isset($data['email']) ? trim($data['email']) : '';
+$field = isset($data['interest']) ? trim($data['interest']) : '';
+$category = isset($data['subInterest']) ? trim($data['subInterest']) : '';
+
+// Validate required fields.
+if (!filter_var($email, FILTER_VALIDATE_EMAIL) || empty($field) || empty($category)) {
+    error_log("Invalid input in save_email.php: email: $email, field: $field, category: $category");
+    echo json_encode(["success" => false, "error" => "Invalid email or missing field/category."]);
+    exit;
+}
+
+// Sanitize inputs using modern filters.
+$email = filter_var($email, FILTER_SANITIZE_EMAIL);
+$field = filter_var($field, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$category = filter_var($category, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+// Set the path to the SQLite database (customers.db in app/db)
+$dbFile = __DIR__ . "/../db/customers.db";
+
+try {
+    // Connect to the SQLite database.
+    $db = new PDO("sqlite:" . $dbFile);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    error_log("Database connection error in save_email.php: " . $e->getMessage());
+    echo json_encode(["success" => false, "error" => "Database connection failed."]);
+    exit;
 }
 
 try {
-    // Define database path
-    $dbPath = dirname(__FILE__) . '/emails.db';
-    
-    // Get the POST data
-    $data = json_decode(file_get_contents('php://input'), true);
+    // Create the customers table if it doesn't exist.
+    // Using CURRENT_TIMESTAMP as the default for created_at.
+    $db->exec("CREATE TABLE IF NOT EXISTS customers (
+        email TEXT PRIMARY KEY,
+        field TEXT NOT NULL,
+        category TEXT NOT NULL,
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP
+    )");
+} catch (PDOException $e) {
+    error_log("Error creating table in save_email.php: " . $e->getMessage());
+    echo json_encode(["success" => false, "error" => "Database setup failed."]);
+    exit;
+}
 
-    error_log("Received data: " . json_encode($data)); // Debugging
-    error_log("Database path: " . $dbPath); // Debugging database path
+try {
+    // Insert or update the customer record.
+    $stmt = $db->prepare("INSERT INTO customers (email, field, category) 
+                          VALUES (?, ?, ?)
+                          ON CONFLICT(email) DO UPDATE SET field = excluded.field, category = excluded.category");
+    $stmt->execute([$email, $field, $category]);
 
-    $email = filter_var($data['email'] ?? '', FILTER_SANITIZE_EMAIL);
-    $interest = htmlspecialchars($data['interest'] ?? '');
-    $subInterest = htmlspecialchars($data['subInterest'] ?? '');
+    // Retrieve the record to include the created_at value in the response.
+    $stmt = $db->prepare("SELECT email, field, category, created_at FROM customers WHERE email = ?");
+    $stmt->execute([$email]);
+    $insertedData = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    error_log("Sanitized data: email=$email, interest=$interest, subInterest=$subInterest"); // Debugging
-
-    if (filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($interest) && !empty($subInterest)) {
-        // Connect to SQLite database with file path
-        $db = new PDO('sqlite:' . $dbPath);
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        error_log("Database connection established"); // Debugging
-
-        // Create table if it doesn't exist
-        $db->exec("
-            CREATE TABLE IF NOT EXISTS emails (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                email TEXT NOT NULL,
-                interest TEXT NOT NULL,
-                sub_interest TEXT NOT NULL
-            )
-        ");
-        error_log("Table creation successful or already exists"); // Debugging
-
-        // Check directory permissions
-        $dbDir = dirname($dbPath);
-        if (!is_writable($dbDir)) {
-            error_log("Directory is not writable: " . $dbDir);
-            throw new Exception("Database directory is not writable");
-        }
-
-        // Insert data
-        $stmt = $db->prepare("INSERT INTO emails (email, interest, sub_interest) VALUES (:email, :interest, :sub_interest)");
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':interest', $interest);
-        $stmt->bindParam(':sub_interest', $subInterest);
-        $stmt->execute();
-        error_log("Data insertion successful"); // Debugging
-
-        // Retrieve the inserted data for the response
-        $stmt = $db->query("SELECT * FROM emails ORDER BY id DESC LIMIT 1");
-        $insertedData = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // Send detailed success response
-        echo json_encode([
-            "success" => true,
-            "message" => "Email and preferences saved successfully!",
-            "email" => $insertedData['email'],
-            "interest" => $insertedData['interest'],
-            "subInterest" => $insertedData['sub_interest'],
-            "createdAt" => $insertedData['created_at']
-        ]);
-    } else {
-        error_log("Invalid email or empty preferences"); // Debugging
-        echo json_encode(["success" => false, "error" => "Invalid email address or preferences."]);
-    }
-} catch (Exception $e) {
-    // Log the error (do not expose sensitive details to the client)
-    error_log("Error in save_email.php: " . $e->getMessage());
-    echo json_encode(["success" => false, "error" => "Server error occurred. Please try again later."]);
+    echo json_encode([
+        "success" => true,
+        "message" => "Email and preferences saved successfully!",
+        "email" => $insertedData['email'],
+        "field" => $insertedData['field'],
+        "category" => $insertedData['category'],
+        "createdAt" => $insertedData['created_at']
+    ]);
+} catch (PDOException $e) {
+    error_log("Database insertion error in save_email.php: " . $e->getMessage());
+    echo json_encode(["success" => false, "error" => "Database insertion error."]);
+    exit;
 }
 ?>
