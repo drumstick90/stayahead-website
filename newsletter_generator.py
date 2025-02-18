@@ -257,7 +257,7 @@ def compose_email(articles, query_date, field, category):
       <p>Your weekly roundup of trending {category} articles in {field}</p>
     </div>
     <div class="content">
-      <p>Dear Colleague,</p>
+      <p>Dear Subscriber,</p>
       <p>Below are the top trending {category} articles in {field} for the past 7 days:</p>
 """
     for article in articles:
@@ -273,12 +273,12 @@ def compose_email(articles, query_date, field, category):
       </div>
 """
     html += """      <p>We hope these articles inspire new insights and robust discussions in your research.</p>
-      <p>Best regards,<br>Your Research Trends Team</p>
+      <p>Best regards,<br>Your Stayahead Team</p>
     </div>
     <div class="footer">
       <p>You are receiving this email because you subscribed to the newsletter.</p>
       <p><a href="#">Unsubscribe</a> | <a href="#">Manage Preferences</a></p>
-      <p>&copy; 2025 Research Trends Inc. All rights reserved.</p>
+      <p>&copy; 2025 Stayahead All rights reserved.</p>
     </div>
   </div>
 </body>

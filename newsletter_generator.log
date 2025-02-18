@@ -163,3 +163,36 @@
 2025-02-16 20:11:04,113 - INFO - Enriched record for DOI 10.1038/s43018-024-00900-3
 2025-02-16 20:11:05,125 - INFO - Adding missing column 'published_date' to paper_trends table.
 2025-02-16 20:11:05,128 - INFO - Stored 5 records in SQLite database.
+2025-02-18 15:27:15,423 - DEBUG - Computed query date: 2025-02-11
+2025-02-18 15:27:15,423 - INFO - Starting internal API query for date: 2025-02-11, field: Clinical Medicine, category: Oncology
+2025-02-18 15:27:15,423 - INFO - Querying internal API with parameters: {'type': 'paper-trends', 'field': 'Clinical Medicine', 'category': 'Oncology', 'email': 'newsletter@example.com', 'day': '2025-02-11'}
+2025-02-18 15:27:15,432 - DEBUG - Starting new HTTPS connection (1): ooir.org:443
+2025-02-18 15:27:20,124 - DEBUG - https://ooir.org:443 "GET /api.php?type=paper-trends&field=Clinical+Medicine&category=Oncology&email=newsletter%40example.com&day=2025-02-11 HTTP/1.1" 200 None
+2025-02-18 15:27:20,127 - DEBUG - Internal API response: [{'field': 'Clinical Medicine', 'category': 'Oncology', 'days': '30', 'rank': '1', 'doi': '10.1016/s1470-2045(25)00033-6', 'issn': '1470-2045', 'score': '1086', 'day': '2025-02-11'}, {'field': 'Clinical Medicine', 'category': 'Oncology', 'days': '30', 'rank': '2', 'doi': '10.1158/1078-0432.ccr-24-2386', 'issn': '1078-0432', 'score': '1071', 'day': '2025-02-11'}, {'field': 'Clinical Medicine', 'category': 'Oncology', 'days': '30', 'rank': '3', 'doi': '10.3322/caac.21871', 'issn': '0007-9235', 'score': '1061', 'day': '2025-02-11'}, {'field': 'Clinical Medicine', 'category': 'Oncology', 'days': '30', 'rank': '4', 'doi': '10.1038/s43018-024-00900-3', 'issn': '2662-1347', 'score': '271', 'day': '2025-02-11'}, {'field': 'Clinical Medicine', 'category': 'Oncology', 'days': '30', 'rank': '5', 'doi': '10.1002/cncr.35673', 'issn': '0008-543X', 'score': '267', 'day': '2025-02-11'}]
+2025-02-18 15:27:20,129 - INFO - Internal API returned 5 records.
+2025-02-18 15:27:20,129 - INFO - Resolving DOI: 10.1016/s1470-2045(25)00033-6
+2025-02-18 15:27:20,131 - DEBUG - Starting new HTTPS connection (1): api.crossref.org:443
+2025-02-18 15:27:20,602 - DEBUG - https://api.crossref.org:443 "GET /works/10.1016%2Fs1470-2045%2825%2900033-6 HTTP/1.1" 200 2140
+2025-02-18 15:27:20,606 - DEBUG - Resolved DOI 10.1016/s1470-2045(25)00033-6 to title: UK's National Cancer Plan needs to be radical, accountable, and deliverable, journal: The Lancet Oncology, published: February 2025
+2025-02-18 15:27:20,607 - INFO - Enriched record for DOI 10.1016/s1470-2045(25)00033-6
+2025-02-18 15:27:21,610 - INFO - Resolving DOI: 10.1158/1078-0432.ccr-24-2386
+2025-02-18 15:27:21,613 - DEBUG - Starting new HTTPS connection (1): api.crossref.org:443
+2025-02-18 15:27:22,047 - DEBUG - https://api.crossref.org:443 "GET /works/10.1158%2F1078-0432.ccr-24-2386 HTTP/1.1" 200 3606
+2025-02-18 15:27:22,050 - DEBUG - Resolved DOI 10.1158/1078-0432.ccr-24-2386 to title: NXP800 Activates the Unfolded Protein Response, Altering AR and E2F Function to Impact Castration-Resistant Prostate Cancer Growth, journal: Clinical Cancer Research, published: 06 February 2025
+2025-02-18 15:27:22,050 - INFO - Enriched record for DOI 10.1158/1078-0432.ccr-24-2386
+2025-02-18 15:27:23,052 - INFO - Resolving DOI: 10.3322/caac.21871
+2025-02-18 15:27:23,055 - DEBUG - Starting new HTTPS connection (1): api.crossref.org:443
+2025-02-18 15:27:23,513 - DEBUG - https://api.crossref.org:443 "GET /works/10.3322%2Fcaac.21871 HTTP/1.1" 200 5993
+2025-02-18 15:27:23,517 - DEBUG - Resolved DOI 10.3322/caac.21871 to title: Cancer statistics, 2025, journal: CA: A Cancer Journal for Clinicians, published: January 2025
+2025-02-18 15:27:23,517 - INFO - Enriched record for DOI 10.3322/caac.21871
+2025-02-18 15:27:24,523 - INFO - Resolving DOI: 10.1038/s43018-024-00900-3
+2025-02-18 15:27:24,525 - DEBUG - Starting new HTTPS connection (1): api.crossref.org:443
+2025-02-18 15:27:25,023 - DEBUG - https://api.crossref.org:443 "GET /works/10.1038%2Fs43018-024-00900-3 HTTP/1.1" 200 10192
+2025-02-18 15:27:25,028 - DEBUG - Resolved DOI 10.1038/s43018-024-00900-3 to title: TRIM28-dependent developmental heterogeneity determines cancer susceptibility through distinct epigenetic states, journal: Nature Cancer, published: 24 January 2025
+2025-02-18 15:27:25,029 - INFO - Enriched record for DOI 10.1038/s43018-024-00900-3
+2025-02-18 15:27:26,034 - INFO - Resolving DOI: 10.1002/cncr.35673
+2025-02-18 15:27:26,036 - DEBUG - Starting new HTTPS connection (1): api.crossref.org:443
+2025-02-18 15:27:26,488 - DEBUG - https://api.crossref.org:443 "GET /works/10.1002%2Fcncr.35673 HTTP/1.1" 200 3900
+2025-02-18 15:27:26,493 - DEBUG - Resolved DOI 10.1002/cncr.35673 to title: Impact of obesity on outcome in children diagnosed with cancer in Canada: A report from Cancer in Young People in Canada, journal: Cancer, published: 13 January 2025
+2025-02-18 15:27:26,493 - INFO - Enriched record for DOI 10.1002/cncr.35673
+2025-02-18 15:27:27,504 - INFO - Stored 5 records in SQLite database.
