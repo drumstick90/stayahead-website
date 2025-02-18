@@ -71,13 +71,13 @@
         </select>
         <button type="submit" class="cta-button">Join for free!</button>
          <!-- GDPR-compliant Terms of Service agreement checkbox -->
-  <div class="tos-agreement">
-    <input type="checkbox" id="tos-checkbox" required>
-    <label for="tos-checkbox">
-      I agree to the <a href="/terms.html" target="_blank">Terms of Service</a> and
-      <a href="/privacy.html" target="_blank">Privacy Policy</a>.
-    </label>
-  </div>
+         <div class="tos-agreement">
+          <input type="checkbox" id="tos-checkbox" required>
+          <label for="tos-checkbox">
+            I agree to the <a href="/terms.html" target="_blank">Terms of Service</a> and
+            <a href="/privacy.html" target="_blank">Privacy Policy</a>.
+          </label>
+        </div>
       </form>
     </div>
 
@@ -166,7 +166,7 @@
   <div class="newsletter-preview-header">
     <h2>A Glimpse of Our Weekly Newsletter</h2>
     <div class="testimonial">
-    <p>Below is an exact sample of what is delivered to your inbox each week.</p></div>
+    <p>Below is an exact sample of what is delivered to your inbox each week. This subscriber selected Clinical Medicine as field and Oncology as a subcategory </p></div>
   </div>
 
   <!-- Inline-styled container to isolate the email snippet’s appearance -->
@@ -473,10 +473,15 @@
         }
       });
       
-      $('#interest-select, #sub-interest-select').select2({
-        placeholder: "Select an option",
-        allowClear: true
-      });
+      $('#interest-select').select2({
+  placeholder: "Select a field",
+  allowClear: true
+});
+
+$('#sub-interest-select').select2({
+  placeholder: "Select a category",
+  allowClear: true
+});
       
       subInterestSelect.disabled = true;
       
