@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="styles.css">
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  
 </head>
 <body>
   <div class="overlay"></div>
@@ -69,6 +70,14 @@
           <!-- Options will be dynamically populated -->
         </select>
         <button type="submit" class="cta-button">Join for free!</button>
+         <!-- GDPR-compliant Terms of Service agreement checkbox -->
+  <div class="tos-agreement">
+    <input type="checkbox" id="tos-checkbox" required>
+    <label for="tos-checkbox">
+      I agree to the <a href="/terms.html" target="_blank">Terms of Service</a> and
+      <a href="/privacy.html" target="_blank">Privacy Policy</a>.
+    </label>
+  </div>
       </form>
     </div>
 
@@ -119,7 +128,7 @@
     </section>
 
     <!-- How It Works Section -->
-    <section id="how-it-works" class="how-it-works">
+    <section id="how-it-works" class="how">
       <div class="container">
         <h2>How It Works</h2>
         <div class="steps-container">
@@ -147,8 +156,157 @@
       </div>
     </section>
 
+    <div class="testimonial">
+      <p>"StayAhead has revolutionized how I keep up with research in my field. It's an invaluable time-saver!"</p>
+      - Dr. Jane Smith, Neuroscientist
+    </div>
+    <!-- Newsletter Preview Section -->
+<!-- Newsletter Preview Section -->
+<section id="newsletter-preview" class="how">
+  <div class="newsletter-preview-header">
+    <h2>A Glimpse of Our Weekly Newsletter</h2>
+    <div class="testimonial">
+    <p>Below is an exact sample of what is delivered to your inbox each week.</p></div>
+  </div>
+
+  <!-- Inline-styled container to isolate the email snippet’s appearance -->
+  <div class="newsletter-email-container" style="
+      max-width: 600px;
+      margin: 20px auto;
+      background: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      font-family: Arial, sans-serif;
+      color: #333;
+    ">
+
+    <!-- Header -->
+    <div class="newsletter-email-header" style="
+        background-color: #2c3e50;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+      ">
+      <h3 style="margin: 0; font-size: 24px;">
+        Trending Clinical Medicine - Oncology Articles - 2025-02-09
+      </h3>
+      <p style="margin: 5px 0;">
+        Your weekly roundup of trending Oncology articles in Clinical Medicine
+      </p>
+    </div>
+
+    <!-- Content -->
+    <div class="newsletter-email-content" style="padding: 20px;">
+      <p>Dear Subscriber,</p>
+      <p>
+        Below are the top trending Oncology articles in Clinical Medicine for the past 7 days:
+      </p>
+
+      <!-- Example article item -->
+      <div class="newsletter-article" style="border-bottom: 1px solid #eee; padding: 10px 0;">
+        <h4 style="margin: 0 0 5px; font-size: 18px;">
+          <a href="https://doi.org/10.1016/s1470-2045(25)00033-6" style="color: #2980b9; text-decoration: none;">
+            UK's National Cancer Plan needs to be radical, accountable, and deliverable
+          </a>
+        </h4>
+        <p style="margin: 5px 0; font-size: 14px; color: #555;">
+          <strong>Journal:</strong> The Lancet Oncology
+        </p>
+        <p style="margin: 5px 0; font-size: 14px; color: #555;">
+          <strong>Publishing Date:</strong> 03 February 2025
+        </p>
+      </div>
+
+      <!-- Repeat for each article... -->
+      <div class="newsletter-article" style="border-bottom: 1px solid #eee; padding: 10px 0;">
+        <h4 style="margin: 0 0 5px; font-size: 18px;">
+          <a href="https://doi.org/10.1158/1078-0432.ccr-24-2386" style="color: #2980b9; text-decoration: none;">
+            NXP800 Activates the Unfolded Protein Response...
+          </a>
+        </h4>
+        <p style="margin: 5px 0; font-size: 14px; color: #555;">
+          <strong>Journal:</strong> Clinical Cancer Research
+        </p>
+        <p style="margin: 5px 0; font-size: 14px; color: #555;">
+          <strong>Publishing Date:</strong> 06 February 2025
+        </p>
+      </div>
+
+    <!-- Additional Articles, Formatted Consistently -->
+<div class="newsletter-article" style="border-bottom: 1px solid #eee; padding: 10px 0;">
+  <h4 style="margin: 0 0 5px; font-size: 18px;">
+    <a href="https://doi.org/10.3322/caac.21871" style="color: #2980b9; text-decoration: none;">
+      Cancer statistics, 2025
+    </a>
+  </h4>
+  <p style="margin: 5px 0; font-size: 14px; color: #555;">
+    <strong>Journal:</strong> CA: A Cancer Journal for Clinicians
+  </p>
+  <p style="margin: 5px 0; font-size: 14px; color: #555;">
+    <strong>Publishing Date:</strong> January 2025
+  </p>
+</div>
+
+<div class="newsletter-article" style="border-bottom: 1px solid #eee; padding: 10px 0;">
+  <h4 style="margin: 0 0 5px; font-size: 18px;">
+    <a href="https://doi.org/10.1002/cncr.35673" style="color: #2980b9; text-decoration: none;">
+      Impact of obesity on outcome in children diagnosed with cancer in Canada:
+      A report from Cancer in Young People in Canada
+    </a>
+  </h4>
+  <p style="margin: 5px 0; font-size: 14px; color: #555;">
+    <strong>Journal:</strong> Cancer
+  </p>
+  <p style="margin: 5px 0; font-size: 14px; color: #555;">
+    <strong>Publishing Date:</strong> 13 January 2025
+  </p>
+</div>
+
+<div class="newsletter-article" style="border-bottom: 1px solid #eee; padding: 10px 0;">
+  <h4 style="margin: 0 0 5px; font-size: 18px;">
+    <a href="https://doi.org/10.1038/s43018-024-00900-3" style="color: #2980b9; text-decoration: none;">
+      TRIM28-dependent developmental heterogeneity determines cancer susceptibility
+      through distinct epigenetic states
+    </a>
+  </h4>
+  <p style="margin: 5px 0; font-size: 14px; color: #555;">
+    <strong>Journal:</strong> Nature Cancer
+  </p>
+  <p style="margin: 5px 0; font-size: 14px; color: #555;">
+    <strong>Publishing Date:</strong> 24 January 2025
+  </p>
+</div>
+      <p>
+        We hope these articles inspire new insights and robust discussions in your research.
+      </p>
+      <p>
+        Best regards,<br />
+        Your Research Trends Team
+      </p>
+    </div>
+
+    <!-- Footer -->
+    <div class="newsletter-email-footer" style="
+        background-color: #ecf0f1;
+        padding: 15px;
+        text-align: center;
+        font-size: 12px;
+        color: #7f8c8d;
+      ">
+      <p>You are receiving this email because you subscribed to the newsletter.</p>
+      <p>
+        <a href="#" style="color: #2980b9; text-decoration: none;">Unsubscribe</a> |
+        <a href="#" style="color: #2980b9; text-decoration: none;">Manage Preferences</a>
+      </p>
+      <p>&copy; 2025 StayAhead! All rights reserved.</p>
+    </div>
+  </div>
+</section>
+
     <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials">
+    <section id="testimonials" class="how">
       <div class="container">
         <h2>What Our Users Say</h2>
         <div class="testimonial">
@@ -163,7 +321,7 @@
     </section>
 
     <!-- FAQ Section -->
-    <section id="faq" class="faq">
+    <section id="faq" class="how">
       <div class="container">
         <h2>Frequently Asked Questions</h2>
         <div class="faq-list">
@@ -216,22 +374,19 @@
         <div class="footer-section">
           <h3>Legal</h3>
           <ul>
-            <li><a href="#">Terms of Service</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="/terms.html">Terms of Service</a></li>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/cookies.html">Cookie Policy</a></li>
           </ul>
         </div>
         <div class="footer-section">
           <h3>Newsletter</h3>
-          <p>Subscribe to our newsletter for the latest updates and offers.</p>
-          <form class="footer-form">
-            <input type="email" placeholder="Enter your email" required>
-            <button type="submit" class="cta-button">Join Now for Free</button>
-          </form>
+          <p>soon</p>
+       
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2023 StayAhead. All rights reserved.</p>
+        <p>&copy; 2025 StayAhead. All rights reserved.</p>
       </div>
     </footer>
   </div>
