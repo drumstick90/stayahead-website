@@ -1,0 +1,1856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGen | 2025</title>
+    <link rel="preload" href="non-critical.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #f8fafc;
+            --accent: #3b82f6;
+            --accent-gradient: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            --success: #10b981;
+            --error: #ef4444;
+            --padding: clamp(1rem, 5vw, 3rem);
+            --radius: 0.5rem;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        html {
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: #0f172a;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            position: relative;
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .blob {
+            position: absolute;
+            width: 50vw;
+            height: 50vw;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 100%;
+            filter: blur(80px);
+            z-index: -1;
+            animation: blob-move 20s infinite alternate ease-in-out;
+            will-change: transform;
+        }
+
+        .blob:nth-child(1) {
+            top: -20%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+
+        .blob:nth-child(2) {
+            bottom: -20%;
+            right: -10%;
+            background: rgba(139, 92, 246, 0.1);
+            animation-delay: -5s;
+        }
+
+        @keyframes blob-move {
+            0% {
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+            100% {
+                transform: translate3d(10%, 10%, 0) scale(1.2);
+            }
+        }
+
+        .page-container {
+            min-height: auto;
+            max-height: none;
+            height: auto;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            margin-top: 4rem;
+            margin-bottom: 1rem;
+            padding-bottom: 2rem;
+        }
+
+        @media (min-width: 1024px) {
+            .page-container {
+                flex-direction: row;
+                align-items: center;
+            }
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 500px;
+            max-height: 95vh;
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: calc(var(--padding) * 0.8);
+            animation: fade-in 1s ease-out;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: auto;
+            will-change: transform, opacity;
+            transform: translateZ(0);
+        }
+
+        .preview-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translate3d(0, 20px, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        h1 {
+            font-size: clamp(1.3rem, 5vw, 2rem);
+            font-weight: 800;
+            margin-bottom: 0.3rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        p {
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            color: rgba(248, 250, 252, 0.8);
+        }
+
+        form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgba(248, 250, 252, 0.9);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: var(--radius);
+            border: 1px solid rgba(248, 250, 252, 0.2);
+            font-size: 1rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--secondary);
+            transition: var(--transition);
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+
+        button {
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--radius);
+            border: none;
+            background: var(--accent-gradient);
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            will-change: transform;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .success-message, .error-message {
+            padding: 0.8rem 1rem;
+            border-radius: var(--radius);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            display: none;
+            animation: slide-up 0.3s ease-out;
+        }
+
+        @keyframes slide-up {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-message {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .error-message {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .loading {
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+            margin-right: 0.5rem;
+            display: none;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .phone-container {
+            position: relative;
+            width: 260px;
+            height: 520px;
+            margin-top: 0;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            transform: rotateY(-10deg) rotateX(5deg);
+            transition: transform 0.5s ease;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .phone-container:hover {
+            transform: rotateY(0deg) rotateX(0deg);
+        }
+
+        .phone {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: #111;
+            border-radius: 36px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3),
+                        0 0 0 2px rgba(255, 255, 255, 0.1);
+            padding: 12px;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background-color: #f4f4f4;
+            border-radius: 26px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .email-preview {
+            width: 100%;
+            height: 100%;
+            background-color: #f4f4f4;
+            color: #333;
+            overflow-y: auto;
+            font-family: Arial, sans-serif;
+        }
+
+        .email-container {
+            max-width: 100%;
+            margin: 0;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            overflow: hidden;
+        }
+
+        .email-header {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .email-header h1 {
+            margin: 0;
+            font-size: 14px;
+            font-weight: bold;
+            background: none;
+            -webkit-text-fill-color: #fff;
+            text-align: center;
+        }
+        
+        .email-header p {
+            margin: 4px 0 0;
+            font-size: 10px;
+            color: #fff;
+        }
+
+        .email-content {
+            padding: 12px;
+        }
+
+        .email-content p {
+            margin: 5px 0;
+            font-size: 11px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .article {
+            border-bottom: 1px solid #eee;
+            padding: 8px 0;
+        }
+
+        .article:last-child {
+            border-bottom: none;
+        }
+
+        .article h2 {
+            margin: 0 0 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .article h2 a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+
+        .article p {
+            margin: 3px 0;
+            font-size: 10px;
+            color: #555;
+        }
+
+        .email-footer {
+            background-color: #ecf0f1;
+            padding: 10px;
+            text-align: center;
+            font-size: 9px;
+            color: #7f8c8d;
+        }
+
+        .preview-label {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: rgba(248, 250, 252, 0.9);
+        }
+
+        .glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.4), transparent 70%);
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        footer {
+            display: none;
+        }
+
+        @media (max-width: 992px) {
+            .two-column-layout {
+                flex-direction: column;
+                align-items: center;
+                gap: 3rem;
+            }
+            
+            .footer-top {
+                flex-direction: column;
+            }
+            
+            .footer-middle {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .content-container {
+                padding-top: 4rem;
+            }
+            
+            .form-container, .preview-container {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-height: 800px) {
+            /* Remove height calculations */
+        }
+
+        .glass-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+        
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem var(--padding);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+        
+        .nav-indicator {
+            position: absolute;
+            bottom: -8px;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gradient);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover .nav-indicator,
+        .nav-link.active .nav-indicator {
+            width: 100%;
+        }
+        
+        .nav-link:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+        
+        .nav-link.active {
+            opacity: 1;
+        }
+        
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .icon-button {
+            background: none;
+            border: none;
+            color: var(--secondary);
+            opacity: 0.8;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.4rem;
+            border-radius: 50%;
+        }
+        
+        .icon-button:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+        }
+        
+        .nav-divider {
+            height: 24px;
+            width: 1px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: var(--radius);
+            background: var(--accent-gradient);
+            color: white;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+        
+        .nav-button svg {
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-button:hover svg {
+            transform: translateX(3px);
+        }
+        
+        .glass-footer {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(5px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            z-index: 900;
+            position: relative;
+            margin-top: 4rem;
+            display: block;
+            min-height: 300px;
+            clear: both;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            width: 92%;
+            margin: 0 auto;
+            padding: 2rem 0;
+            display: block;
+            contain: content;
+        }
+        
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+        }
+        
+        .footer-brand {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .footer-brand p {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            opacity: 0.8;
+            max-width: 300px;
+        }
+        
+        .footer-newsletter {
+            margin-top: 1.5rem;
+        }
+        
+        .footer-newsletter h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .newsletter-form {
+            width: 100%;
+            max-width: 320px;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.6rem 1rem;
+            border-radius: var(--radius);
+            border: 1px solid rgba(248, 250, 252, 0.2);
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+        
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        .newsletter-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            border-radius: var(--radius);
+            border: none;
+            background: var(--accent-gradient);
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .newsletter-button:hover {
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        .newsletter-button svg {
+            transition: transform 0.3s ease;
+        }
+        
+        .newsletter-button:hover svg {
+            transform: translateX(3px);
+        }
+        
+        .footer-links {
+            display: flex;
+            flex: 2;
+            justify-content: space-around;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+            min-width: 120px;
+        }
+        
+        .footer-column h4 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+        
+        .footer-column a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 0.7rem;
+            transition: var(--transition);
+        }
+        
+        .footer-column a:hover {
+            opacity: 0.9;
+            transform: none;
+        }
+        
+        .new-tag {
+            position: relative;
+        }
+        
+        .new-tag::after {
+            content: 'New';
+            position: absolute;
+            top: -8px;
+            right: -16px;
+            background: linear-gradient(90deg, #3B82F6, #8B5CF6);
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 5px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        
+        .footer-middle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+        }
+        
+        .trust-badges {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        
+        .language-selector {
+            position: relative;
+        }
+        
+        .lang-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--secondary);
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .lang-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            flex-wrap: wrap;
+            gap: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-icons a {
+            color: var(--secondary);
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+        
+        .social-icons a:hover {
+            opacity: 0.9;
+            transform: none;
+        }
+        
+        .payment-methods {
+            display: flex;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+        
+        .payment-icon {
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        
+        .payment-icon:hover {
+            opacity: 1;
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        .content-container {
+            flex: 1 0 auto;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 1rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .two-column-layout {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 4rem;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #4B74FF, #8B5CF6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .form-container h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #4B9DFF, #6366F1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        .form-container p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .form-group input, .form-group select {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 0.9rem 1.2rem;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(75, 157, 255, 0.5);
+            box-shadow: 0 0 0 3px rgba(75, 157, 255, 0.25);
+        }
+
+        .form-group label {
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            display: block;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        button[type="submit"] {
+            background: linear-gradient(90deg, #4B74FF, #6366F1);
+            border: none;
+            border-radius: 10px;
+            padding: 1rem 1.2rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(75, 116, 255, 0.3);
+            will-change: transform;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(75, 116, 255, 0.4);
+        }
+
+        .preview-label {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        @media (max-width: 992px) {
+            .two-column-layout {
+                flex-direction: column;
+            }
+            
+            .form-container, .preview-container {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+        }
+
+        body > footer.glass-footer {
+            flex-shrink: 0;
+            display: block !important;
+            visibility: visible !important;
+        }
+
+        @media (max-width: 768px) {
+            .glass-footer {
+                backdrop-filter: none;
+                background: #0f172a;
+            }
+            
+            .footer-top, .footer-middle, .footer-bottom {
+                box-shadow: none;
+            }
+        }
+
+        /* Updated TOS Agreement Styles */
+        .tos-agreement {
+            display: flex;
+            align-items: center;
+            margin: 1rem 0;
+            gap: 0.75rem;
+            width: 100%;
+        }
+        
+        .tos-agreement input[type="checkbox"] {
+            margin: 0;
+            width: auto;
+            flex-shrink: 0;
+            height: 18px;
+            width: 18px;
+        }
+        
+        .tos-agreement label {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin: 0;
+            flex: 1;
+            color: rgba(248, 250, 252, 0.9);
+        }
+        
+        .form-group.tos-container {
+            margin-bottom: 1rem;
+        }
+        
+        .tos-agreement a {
+            color: #4B9DFF;
+            text-decoration: underline;
+            transition: color 0.2s ease;
+        }
+        
+        .tos-agreement a:hover {
+            color: #6366F1;
+        }
+
+        /* Make sure the Select2 dropdowns match our styling */
+        .select2-container--default .select2-selection--single {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: white;
+            line-height: 3rem;
+            padding-left: 1.2rem;
+        }
+        
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 3rem;
+        }
+        
+        .select2-dropdown {
+            background-color: #1a273d;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .select2-container--default .select2-results__option--highlighted[aria-selected] {
+            background-color: #4B74FF;
+        }
+        
+        .select2-container--default .select2-results__option {
+            color: white;
+        }
+        
+        .select2-container--default .select2-search--dropdown .select2-search__field {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        /* Proactivity Section Styles */
+        .proactivity-section {
+            background: linear-gradient(to bottom, rgba(22, 33, 62, 0.8), rgba(30, 44, 75, 0.8));
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .proactivity-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMzYjgyZjYiIGZpbGwtb3BhY2l0eT0iMC4wNCI+PHBhdGggZD0iTTM2IDM0djZoLTZ2LTZoNnptMC0xMnY2aC02di02aDZ6bTEyIDB2Nmg2djZoLTZ2MTJoLTZ2LTI0aDEyem0tMTggMTJ2Nkg0MnY2aC0xMnYtMTJ6Ii8+PC9nPjwvZz48L3N2Zz4=');
+            opacity: 0.3;
+        }
+        
+        .proactivity-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .proactivity-tips {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .tip-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .tip-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border-color: rgba(75, 157, 255, 0.3);
+        }
+        
+        .tip-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #4B74FF, #6366F1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .tip-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .tip-card p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        
+        .tip-action {
+            color: #4B9DFF;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+        
+        .tip-action:hover {
+            color: #6366F1;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.8);
+            z-index: 10000;
+            overflow-y: auto;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: #1a273d;
+            margin: 5% auto;
+            width: 90%;
+            max-width: 700px;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            animation: modalFadeIn 0.4s ease-out;
+            will-change: transform, opacity;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translate3d(0, 20px, 0); }
+            to { opacity: 1; transform: translate3d(0, 0, 0); }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            z-index: 5;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .modal-header {
+            padding: 2rem 2rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .modal-header svg {
+            margin-bottom: 1rem;
+        }
+        
+        .modal-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #4CAF50, #8BC34A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .modal-body {
+            padding: 2rem;
+        }
+        
+        .confirmation-message {
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .modal-body h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-align: center;
+        }
+        
+        .next-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .step {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #4B74FF, #6366F1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex-grow: 1;
+        }
+        
+        .step-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        .step-content p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+        
+        .calendar-button {
+            background: linear-gradient(to right, #4B74FF, #6366F1);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .calendar-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(75, 116, 255, 0.3);
+        }
+        
+        .share-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .share-button {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .twitter {
+            background: #1DA1F2;
+            color: white;
+        }
+        
+        .linkedin {
+            background: #0077B5;
+            color: white;
+        }
+        
+        .email {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .share-button:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+        
+        .modal-footer {
+            padding: 1rem 2rem 2rem;
+            text-align: center;
+        }
+        
+        .primary-button {
+            background: linear-gradient(to right, #4CAF50, #8BC34A);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+        
+        .primary-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+        
+        @media (max-width: 768px) {
+            .step {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .step-number {
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="glow"></div>
+
+    <nav class="glass-navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="url(#paint0_linear)" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M2 17L12 22L22 17" stroke="url(#paint1_linear)" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M2 12L12 17L22 12" stroke="url(#paint2_linear)" stroke-width="2" stroke-linejoin="round"/>
+                    <defs>
+                        <linearGradient id="paint0_linear" x1="2" y1="7" x2="22" y2="7" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#3B82F6"/>
+                            <stop offset="1" stop-color="#8B5CF6"/>
+                        </linearGradient>
+                        <linearGradient id="paint1_linear" x1="2" y1="19.5" x2="22" y2="19.5" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#3B82F6"/>
+                            <stop offset="1" stop-color="#8B5CF6"/>
+                        </linearGradient>
+                        <linearGradient id="paint2_linear" x1="2" y1="14.5" x2="22" y2="14.5" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#3B82F6"/>
+                            <stop offset="1" stop-color="#8B5CF6"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span>StayAhead</span>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="nav-link active">
+                    <span>Home</span>
+                    <div class="nav-indicator"></div>
+                </a>
+                <a href="#" class="nav-link">
+                    <span>Research</span>
+                    <div class="nav-indicator"></div>
+                </a>
+                <a href="#" class="nav-link">
+                    <span>Specialties</span>
+                    <div class="nav-indicator"></div>
+                </a>
+                <a href="#" class="nav-link">
+                    <span>Pricing</span>
+                    <div class="nav-indicator"></div>
+                </a>
+            </div>
+            <div class="nav-actions">
+                <button class="icon-button" aria-label="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
+                <button class="icon-button" aria-label="Notifications">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                    <span class="notification-badge"></span>
+                </button>
+                <div class="nav-divider"></div>
+                <a href="#" class="nav-button">
+                    <span>Get Access</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="content-container">
+        <h1 class="page-title">Stay Ahead in Medical Research</h1>
+        <p class="page-subtitle">Get personalized, AI-curated updates from <span class="highlight">top medical journals</span> straight to your inbox. Join 12,000+ healthcare professionals who trust StayAhead.</p>
+        
+        <div class="two-column-layout">
+            <div class="form-container">
+                <h1>Join Our Research Updates</h1>
+                <p>Sign up to receive the latest medical research articles in your specialty. Stay informed with our curated content delivered directly to your inbox.</p>
+                
+                <form class="cta-form" id="signup-form">
+                    <div class="form-group">
+                        <label for="email-input">Email Address</label>
+                        <input type="email" id="email-input" placeholder="you@example.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="interest-select">Medical Specialty</label>
+                        <select id="interest-select" required>
+                            <option value="">Select your main area of interest</option>
+                            <option value="Agricultural Sciences">Agricultural Sciences</option>
+                            <option value="Arts & Humanities">Arts & Humanities</option>
+                            <option value="Biology & Biochemistry">Biology & Biochemistry</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Clinical Medicine">Clinical Medicine</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Economics & Business">Economics & Business</option>
+                            <option value="Engineering">Engineering</option>
+                            <option value="Environment and Ecology">Environment and Ecology</option>
+                            <option value="Geosciences">Geosciences</option>
+                            <option value="History & Archaeology">History & Archaeology</option>
+                            <option value="Literature & Language">Literature & Language</option>
+                            <option value="Materials Science">Materials Science</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Philosophy & Religion">Philosophy & Religion</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Plant & Animal Science">Plant & Animal Science</option>
+                            <option value="Psychiatry and Psychology">Psychiatry and Psychology</option>
+                            <option value="Social Sciences">Social Sciences</option>
+                            <option value="Visual & Performing Arts">Visual & Performing Arts</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sub-interest-select">Sub-Specialty</label>
+                        <select id="sub-interest-select" required>
+                            <option value="">Select sub-interest</option>
+                            <!-- Options will be dynamically populated -->
+                        </select>
+                    </div>
+                    
+                    <div class="form-group tos-container">
+                        <div class="tos-agreement">
+                            <input type="checkbox" id="tos-checkbox" required>
+                            <label for="tos-checkbox">
+                                I agree to the <a href="/terms.html" target="_blank">Terms of Service</a> and
+                                <a href="/privacy.html" target="_blank">Privacy Policy</a>.
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" id="subscribe-button">Join for free!</button>
+                </form>
+                
+                <div class="success-message" id="success-message">
+                    Thanks for subscribing! You'll receive your first update soon.
+                </div>
+                
+                <div class="error-message" id="error-message">
+                    There was an error processing your request. Please try again.
+                </div>
+            </div>
+
+            <div class="preview-container">
+                <div class="preview-label">Preview on your device</div>
+                <div class="phone-container">
+                    <div class="phone">
+                        <div class="phone-screen">
+                            <div class="email-preview">
+                                <div class="email-container">
+                                    <div class="email-header">
+                                        <h1>Trending Clinical Medicine - <span id="preview-interest">Oncology</span> Articles - 2025-02-24</h1>
+                                        <p>Your <span id="preview-frequency">weekly</span> roundup of trending <span id="preview-interest2">Oncology</span> articles in Clinical Medicine</p>
+                                    </div>
+                                    <div class="email-content">
+                                        <p>Dear Colleague,</p>
+                                        <p>Below are the top trending <span id="preview-interest3">Oncology</span> articles in Clinical Medicine for the past 7 days:</p>
+                                        
+                                        <div class="article">
+                                            <h2><a href="#">UK's National Cancer Plan needs to be radical, accountable, and deliverable</a></h2>
+                                            <p><strong>Journal:</strong> The Lancet Oncology</p>
+                                            <p><strong>Publishing Date:</strong> February 2025</p>
+                                        </div>
+                                        
+                                        <div class="article">
+                                            <h2><a href="#">NXP800 Activates the Unfolded Protein Response, Altering AR and E2F Function</a></h2>
+                                            <p><strong>Journal:</strong> Clinical Cancer Research</p>
+                                            <p><strong>Publishing Date:</strong> 06 February 2025</p>
+                                        </div>
+                                        
+                                        <div class="article">
+                                            <h2><a href="#">Cancer statistics, 2025</a></h2>
+                                            <p><strong>Journal:</strong> CA: A Cancer Journal for Clinicians</p>
+                                            <p><strong>Publishing Date:</strong> January 2025</p>
+                                        </div>
+                                        
+                                        <div class="article">
+                                            <h2><a href="#">Impact of obesity on outcome in children diagnosed with cancer in Canada</a></h2>
+                                            <p><strong>Journal:</strong> Cancer</p>
+                                            <p><strong>Publishing Date:</strong> 13 January 2025</p>
+                                        </div>
+                                        
+                                        <p>We hope these articles inspire new insights and robust discussions in your research.</p>
+                                        <p>Best regards,<br>Your Research Trends Team</p>
+                                    </div>
+                                    <div class="email-footer">
+                                        <p>You are receiving this email because you subscribed to the newsletter.</p>
+                                        <p><a href="#">Unsubscribe</a> | <a href="#">Manage Preferences</a></p>
+                                        <p>&copy; 2025 Research Trends Inc. All rights reserved.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="glass-footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="url(#paint0_linear)" stroke-width="2" stroke-linejoin="round"/>
+                            <path d="M2 17L12 22L22 17" stroke="url(#paint1_linear)" stroke-width="2" stroke-linejoin="round"/>
+                            <path d="M2 12L12 17L22 12" stroke="url(#paint2_linear)" stroke-width="2" stroke-linejoin="round"/>
+                            <defs>
+                                <linearGradient id="paint0_linear" x1="2" y1="7" x2="22" y2="7" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#3B82F6"/>
+                                    <stop offset="1" stop-color="#8B5CF6"/>
+                                </linearGradient>
+                                <linearGradient id="paint1_linear" x1="2" y1="19.5" x2="22" y2="19.5" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#3B82F6"/>
+                                    <stop offset="1" stop-color="#8B5CF6"/>
+                                </linearGradient>
+                                <linearGradient id="paint2_linear" x1="2" y1="14.5" x2="22" y2="14.5" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#3B82F6"/>
+                                    <stop offset="1" stop-color="#8B5CF6"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span>StayAhead</span>
+                    </div>
+                    <p>Delivering curated medical research updates to keep healthcare professionals informed in their specialty.</p>
+                    
+                    <div class="footer-newsletter">
+                        <h4>Join 12,000+ subscribers</h4>
+                        <div class="newsletter-form">
+                            <input type="email" placeholder="Enter your email" aria-label="Email for newsletter">
+                            <button type="button" class="newsletter-button">
+                                <span>Subscribe</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Platform</h4>
+                        <a href="#">How it Works</a>
+                        <a href="#">Research Sources</a>
+                        <a href="#">AI Curation</a>
+                        <a href="#">For Institutions</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <a href="#">Medical Specialties</a>
+                        <a href="#" class="new-tag">Research Database</a>
+                        <a href="#">API Access</a>
+                        <a href="#">Help Center</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <a href="#">About Us</a>
+                        <a href="#" class="new-tag">Careers</a>
+                        <a href="#">Blog</a>
+                        <a href="#">Contact</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">GDPR Compliance</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-middle">
+                <div class="trust-badges">
+                    <div class="badge">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        <span>HIPAA Compliant</span>
+                    </div>
+                    <div class="badge">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                        <span>256-bit Encryption</span>
+                    </div>
+                    <div class="badge">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                        <span>SOC 2 Certified</span>
+                    </div>
+                </div>
+                
+                <div class="language-selector">
+                    <button class="lang-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        <span>English (US)</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="social-icons">
+                    <a href="#" aria-label="Twitter">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+                    </a>
+                    <a href="#" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    </a>
+                    <a href="#" aria-label="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77a5.07 5.07 0 0 0 1.91-1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="#" aria-label="YouTube">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                    </a>
+                </div>
+                
+                <div class="payment-methods">
+                    <img src="https://cdn-icons-png.flaticon.com/64/196/196578.png" alt="Visa" class="payment-icon" width="32" height="20" loading="lazy">
+                    <img src="https://cdn-icons-png.flaticon.com/64/196/196561.png" alt="Mastercard" class="payment-icon" width="32" height="20" loading="lazy">
+                    <img src="https://cdn-icons-png.flaticon.com/64/196/196565.png" alt="PayPal" class="payment-icon" width="32" height="20" loading="lazy">
+                    <img src="https://cdn-icons-png.flaticon.com/64/196/196539.png" alt="American Express" class="payment-icon" width="32" height="20" loading="lazy">
+                </div>
+                
+                <div class="copyright">
+                    &copy; 2025 StayAhead. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Cache DOM queries for better performance
+            const $form = $('.cta-form');
+            const $emailInput = $('#email-input');
+            const $interestSelect = $('#interest-select');
+            const $subInterestSelect = $('#sub-interest-select');
+            const $tosCheckbox = $('#tos-checkbox');
+            
+            // Initialize fieldsAndCategories once
+            const fieldsAndCategories = {
+                "Clinical Medicine": {
+                    "categories": {
+                        "Oncology": "oncology",
+                        "Cardiology": "cardiology",
+                        "Neurology": "neurology",
+                        "Pediatrics": "pediatrics",
+                        "Psychiatry": "psychiatry"
+                    }
+                },
+                "Computer Science": {
+                    "categories": {
+                        "Artificial Intelligence": "ai",
+                        "Machine Learning": "ml",
+                        "Data Science": "data-science",
+                        "Cybersecurity": "cybersecurity",
+                        "Software Engineering": "software-eng"
+                    }
+                }
+                // Add more fields and categories as needed
+            };
+            
+            // Function to populate the main interest select
+            function populateInterestSelect() {
+                $interestSelect.empty().append('<option value="">Select your main area of interest</option>');
+                
+                Object.keys(fieldsAndCategories).forEach(field => {
+                    $interestSelect.append(`<option value="${field}">${field}</option>`);
+                });
+                
+                $interestSelect.trigger('change');
+            }
+            
+            // Function to update sub-interests based on main interest
+            function updateSubInterests() {
+                const selectedInterest = $interestSelect.val();
+                $subInterestSelect.empty().append('<option value="">Select sub-interest</option>');
+                
+                if (selectedInterest && fieldsAndCategories[selectedInterest]) {
+                    const categories = fieldsAndCategories[selectedInterest].categories;
+                    
+                    Object.entries(categories).forEach(([name, value]) => {
+                        $subInterestSelect.append(`<option value="${value}">${name}</option>`);
+                    });
+                    
+                    $subInterestSelect.prop('disabled', false);
+                } else {
+                    $subInterestSelect.prop('disabled', true);
+                }
+                
+                $subInterestSelect.trigger('change');
+            }
+            
+            // Initialize Select2 for enhanced dropdowns
+            $interestSelect.select2({
+                placeholder: "Select a field",
+                allowClear: true,
+                dropdownParent: $('.form-container'),
+                minimumResultsForSearch: 10
+            });
+            
+            $subInterestSelect.select2({
+                placeholder: "Select a category",
+                allowClear: true,
+                dropdownParent: $('.form-container')
+            });
+            
+            // Event listener for interest select change
+            $interestSelect.on('change', updateSubInterests);
+            
+            // Form submission handler
+            $form.on('submit', async function(e) {
+                e.preventDefault();
+                
+                const email = $emailInput.val();
+                const interest = $interestSelect.val();
+                const subInterest = $subInterestSelect.val();
+                const tosAccepted = $tosCheckbox.prop('checked');
+                
+                if (!email || !interest || !subInterest || !tosAccepted) {
+                    alert('Please fill in all fields and accept the Terms of Service.');
+                    return;
+                }
+                
+                try {
+                    // Replace this with your actual submission code
+                    const response = await fetch('/submit-form', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, interest, subInterest, tosAccepted }),
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        showSuccessModal();
+                        $form[0].reset();
+                        updateSubInterests();
+                    } else {
+                        alert(`Error: ${data.error}`);
+                    }
+                } catch (error) {
+                    alert(`Submission error: ${error.message}`);
+                }
+            });
+            
+            // Initialize the form
+            populateInterestSelect();
+            $subInterestSelect.prop('disabled', true);
+        });
+
+        // Function to show the success modal
+        function showSuccessModal() {
+            const modal = document.getElementById('success-modal');
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+        }
+
+        // Close modal when clicking the X button
+        document.querySelector('.close-modal')?.addEventListener('click', function() {
+            document.getElementById('success-modal').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        });
+
+        // Close modal when clicking the Got it button
+        document.getElementById('close-modal-button')?.addEventListener('click', function() {
+            document.getElementById('success-modal').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        });
+
+        // Close modal when clicking outside the modal content
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('success-modal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Re-enable scrolling
+            }
+        });
+
+        // Calendar button functionality
+        document.querySelector('.calendar-button')?.addEventListener('click', function() {
+            // Add your calendar functionality here
+            const event = {
+                title: 'Review StayAhead Research Updates',
+                description: 'Set aside time to review the latest research papers from StayAhead',
+                startDate: new Date(),
+                endDate: new Date(new Date().getTime() + 30 * 60000) // 30 minutes from now
+            };
+            
+            // You can implement calendar integration here or just show a confirmation
+            alert('Calendar reminder created!');
+        });
+    </script>
+</body>
+</html>
