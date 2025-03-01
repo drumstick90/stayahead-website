@@ -9,50 +9,605 @@
   <link rel="stylesheet" href="styles.css">
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    /* Completely new navbar styles */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      background-color: #FFF8E7;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      z-index: 1000;
+      padding: 0;
+    }
+    
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 15px 20px;
+    }
+    
+    .site-branding {
+      display: flex;
+      align-items: center;
+    }
+    
+    .site-logo {
+      height: 30px;
+      margin-right: 12px;
+    }
+    
+    .site-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #222;
+      text-decoration: none;
+    }
+    
+    .main-navigation {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+    
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .nav-menu a {
+      color: #333;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 5px 0;
+      position: relative;
+      transition: color 0.2s ease;
+    }
+    
+    .nav-menu a:hover {
+      color: #3b82f6;
+    }
+    
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #3b82f6;
+      transition: width 0.3s ease;
+    }
+    
+    .nav-menu a:hover::after {
+      width: 100%;
+    }
+    
+    .cta-button-nav {
+      background-color: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+    
+    .cta-button-nav:hover {
+      background-color: #2563eb;
+      transform: translateY(-2px);
+    }
+    
+    /* Mobile menu button */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #333;
+    }
+    
+    /* Adjust content to account for fixed header */
+    .page-content {
+      padding-top: 80px; /* Adjust based on actual header height */
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+      }
+      
+      .menu-toggle {
+        display: block;
+      }
+      
+      /* When mobile menu is active */
+      .nav-menu.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #FFF8E7;
+        padding: 20px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      }
+    }
+  </style>
+  <!-- Step 2: Add CSS styles for the new navbar -->
+  <style>
+    /* Enhanced navbar styling */
+    .primary-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.95); /* Match the body background */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06); /* More subtle shadow */
+      z-index: 1000;
+      padding: 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .nav-container {
+      width: 100%;
+      padding: 18px 5%; /* Increased vertical padding */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    /* Improved logo styling */
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #1a1a1a; /* Darker text for better contrast */
+    }
+    
+    .nav-logo img {
+      height: 35px; /* Slightly larger logo */
+      margin-right: 12px;
+    }
+    
+    .nav-logo span {
+      font-weight: 800; /* Extra bold */
+      font-size: 1.6rem;
+      letter-spacing: -0.5px; /* Tighter letter spacing for modern look */
+    }
+    
+    /* Better navigation menu styling */
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 32px; /* Increased spacing between items */
+    }
+    
+    .nav-link {
+      color: #333;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      position: relative;
+      padding: 6px 0;
+      transition: color 0.2s;
+    }
+    
+    .nav-link:hover {
+      color: #2563eb; /* Slightly darker blue for better contrast */
+    }
+    
+    /* Refined hover underline effect */
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #2563eb;
+      transition: width 0.25s cubic-bezier(0.65, 0, 0.35, 1); /* Improved easing */
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    /* Enhanced CTA button */
+    .nav-button {
+      background-color: #2563eb;
+      color: white;
+      padding: 10px 20px; /* Larger padding */
+      border-radius: 6px; /* Slightly more rounded */
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      box-shadow: 0 2px 5px rgba(37, 99, 235, 0.2); /* Subtle shadow */
+    }
+    
+    .nav-button:hover {
+      background-color: #1d4ed8; /* Slightly darker on hover */
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+    
+    .nav-button:active {
+      transform: translateY(0); /* Press effect */
+    }
+    
+    /* Improved mobile toggle */
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+    }
+    
+    .mobile-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px; /* Thinner lines */
+      background-color: #1a1a1a;
+      margin: 6px 0;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    
+    /* Mobile menu improvements */
+    @media (max-width: 768px) {
+      .nav-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: rgba(255, 255, 255, 0.95); /* Match the body background */
+        flex-direction: column;
+        padding: 20px 7%;
+        gap: 18px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+        transform: translateY(-150%);
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: -1;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+      }
+      
+      .nav-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        z-index: 1000;
+      }
+      
+      .mobile-toggle {
+        display: block;
+      }
+      
+      .nav-button {
+        width: 100%;
+        text-align: center;
+        margin-top: 8px;
+      }
+    }
+  </style>
+  <style>
+    /* Typography System */
+    :root {
+      /* Font Family */
+      --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      
+      /* Font Sizes - using a modular scale */
+      --text-xs: 0.75rem;   /* 12px */
+      --text-sm: 0.875rem;  /* 14px */
+      --text-base: 1rem;    /* 16px */
+      --text-lg: 1.125rem;  /* 18px */
+      --text-xl: 1.25rem;   /* 20px */
+      --text-2xl: 1.5rem;   /* 24px */
+      --text-3xl: 1.875rem; /* 30px */
+      --text-4xl: 2.25rem;  /* 36px */
+      
+      /* Font Weights */
+      --weight-normal: 400;
+      --weight-medium: 500;
+      --weight-semibold: 600;
+      --weight-bold: 700;
+      
+      /* Line Heights */
+      --leading-tight: 1.2;
+      --leading-normal: 1.5;
+      --leading-relaxed: 1.625;
+      
+      /* Letter Spacing */
+      --tracking-tighter: -0.05em;
+      --tracking-tight: -0.025em;
+      --tracking-normal: 0;
+      --tracking-wide: 0.025em;
+    }
+    
+    /* Base Typography */
+    body {
+      font-family: var(--font-primary);
+      font-size: var(--text-base);
+      line-height: var(--leading-normal);
+      color: var(--color-text);
+    }
+    
+    /* Headings */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-primary);
+      font-weight: var(--weight-bold);
+      line-height: var(--leading-tight);
+      color: var(--color-heading);
+      margin-top: 0;
+      margin-bottom: 0.5em;
+    }
+    
+    h1 {
+      font-size: var(--text-4xl);
+      letter-spacing: var(--tracking-tight);
+    }
+    
+    h2 {
+      font-size: var(--text-3xl);
+    }
+    
+    h3 {
+      font-size: var(--text-2xl);
+    }
+  </style>
+  <style>
+    /* Color System */
+    :root {
+      /* Primary Colors */
+      --color-primary: #2563eb;
+      --color-primary-light: #3b82f6;
+      --color-primary-dark: #1d4ed8;
+      
+      /* Neutral Colors */
+      --color-bg: rgba(255, 255, 255, 0.95);
+      --color-heading: #1a1a1a;
+      --color-text: #333333;
+      --color-text-light: #666666;
+      --color-border: rgba(0, 0, 0, 0.1);
+      
+      /* Accent Colors */
+      --color-success: #10b981;
+      --color-warning: #f59e0b;
+      --color-error: #ef4444;
+      
+      /* UI Colors */
+      --color-shadow: rgba(0, 0, 0, 0.08);
+      --color-overlay: rgba(0, 0, 0, 0.03);
+    }
+    
+    /* Apply consistent colors */
+    .nav-link:hover,
+    .nav-link:focus {
+      color: var(--color-primary);
+    }
+    
+    .nav-link::after {
+      background-color: var(--color-primary);
+    }
+    
+    .nav-button {
+      background-color: var(--color-primary);
+      box-shadow: 0 2px 5px rgba(37, 99, 235, 0.2);
+    }
+    
+    .nav-button:hover {
+      background-color: var(--color-primary-dark);
+    }
+  </style>
+  <style>
+    /* Spacing System */
+    :root {
+      --space-1: 0.25rem;  /* 4px */
+      --space-2: 0.5rem;   /* 8px */
+      --space-3: 0.75rem;  /* 12px */
+      --space-4: 1rem;     /* 16px */
+      --space-6: 1.5rem;   /* 24px */
+      --space-8: 2rem;     /* 32px */
+      --space-12: 3rem;    /* 48px */
+      --space-16: 4rem;    /* 64px */
+      --space-20: 5rem;    /* 80px */
+    }
+    
+    /* Section spacing */
+    section {
+      margin-bottom: var(--space-16);
+    }
+    
+    /* Consistent form element spacing */
+    .cta-form {
+      gap: var(--space-4);
+    }
+    
+    /* Card and container spacing */
+    .feature-box,
+    .testimonial,
+    .step {
+      padding: var(--space-6);
+    }
+    
+    /* Navbar padding */
+    .nav-container {
+      padding: var(--space-4) 5%;
+    }
+  </style>
+  <style>
+    /* Consistent UI elements */
+    
+    /* Buttons */
+    .button, 
+    .nav-button,
+    button[type="submit"] {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3) var(--space-6);
+      border-radius: 6px;
+      font-weight: var(--weight-semibold);
+      font-size: var(--text-base);
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    
+    /* Primary buttons */
+    .button-primary,
+    .nav-button,
+    button[type="submit"] {
+      background-color: var(--color-primary);
+      color: white;
+      border: none;
+      box-shadow: 0 2px 4px var(--color-shadow);
+    }
+    
+    .button-primary:hover,
+    .nav-button:hover,
+    button[type="submit"]:hover {
+      background-color: var(--color-primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px var(--color-shadow);
+    }
+    
+    /* Form elements */
+    input, select, textarea {
+      padding: var(--space-3) var(--space-4);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      font-family: var(--font-primary);
+      font-size: var(--text-base);
+      width: 100%;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--color-primary-light);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+  </style>
 </head>
 <body>
   <!-- Remove these style rules -->
   <style>
-    /* Remove gradient background */
+    /* Update background to transparent white */
     body {
-        background-image: url('Images/background.jpg');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        color: #333;
-        font-family: 'Arial', sans-serif;
-        line-height: 1.6;
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden;
+      background-image: none;
+      background-color: rgba(255, 255, 255, 0.95); /* White with 95% opacity */
+      color: #333;
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
     }
     
     /* Remove blob elements */
     .blob {
-        display: none;
+      display: none;
     }
     
     /* Remove glass navbar styles */
     .glass-navbar {
-        display: none;
+      display: none;
     }
     
     /* Restore the overlay */
     .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-        pointer-events: none;
-        background-color: rgba(255, 255, 255, 0.6);
-        display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+      background-color: rgba(255, 255, 255, 0.2);
+      display: block;
     }
     
     /* Restore original container margin */
     .container {
-        margin-top: 0;
+      margin-top: 0;
+    }
+    
+    /* Fixed navbar styles */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #FFF8E7; /* Match the cream background */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      padding: 15px 0;
+    }
+    
+    /* Adjust container to account for fixed navbar */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Add padding to the top of the first section to prevent content from being hidden behind navbar */
+    .hero {
+      padding-top: 100px; /* Adjust based on your navbar height */
+    }
+    
+    /* Logo and nav links styling */
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo img {
+      height: 30px;
+      margin-right: 10px;
+    }
+    
+    .logo span {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+    
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-links a:hover {
+      color: #3b82f6;
+    }
+    
+    /* Make the container within the navbar properly centered */
+    nav > .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
   </style>
   
@@ -61,83 +616,94 @@
   <div class="blob"></div> -->
 
   <!-- Restore the overlay -->
-  <div class="overlay"></div>
+  <!-- <div class="overlay"></div> -->
 
   <!-- Replace glass navbar with original nav -->
-  <div class="container">
-    <nav>
-      <div class="logo">
-        <img src="Images/logo.svg" alt="StayAhead Logo">
-        <span>StayAhead</span>
-      </div>
-      <div class="nav-links">
-        <a href="#features">Features</a>
-        <a href="#how-it-works">How It Works</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#faq">FAQ</a>
+  <header class="site-header">
+    <!-- This entire block will be removed -->
+  </header>
+  
+  <!-- Wrap all content in a page-content div to properly adjust spacing -->
+  <div class="page-content">
+    <!-- Step 1: Add the basic navbar HTML structure -->
+    <nav class="primary-nav">
+      <div class="nav-container">
+        <a href="/" class="nav-logo">
+          <img src="Images/logo.svg" alt="StayAhead Logo">
+          <span>StayAhead</span>
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div class="nav-menu">
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#how-it-works" class="nav-link">How It Works</a>
+          <a href="#newsletter-preview" class="nav-link">Preview</a>
+          <a href="#testimonials" class="nav-link">Testimonials</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+          <a href="#signup-form" class="nav-button">Get Started</a>
+        </div>
       </div>
     </nav>
-  </div>
-  
-  <!-- Keep the rest of the page content -->
-  <div class="container">
-    <!-- Hero Section -->
-    <section class="hero">
-      <h1 class="fade-in-up">StayAhead! in Your Field — For Free</h1>
-      <p class="fade-in-up" style="animation-delay: 0.2s;">
-        Cut through the noise – discover the ten most influential studies delivered straight to your inbox.
-      </p>
-      <p class="fade-in-up" style="animation-delay: 0.4s;">
-        No cost, no hassle—just valuable insights every week.
-      </p>
-    </section>
+    <div class="container">
+      <!-- Hero Section -->
+      <section class="hero">
+        <h1 class="fade-in-up">StayAhead! in Your Field — For Free</h1>
+        <p class="fade-in-up" style="animation-delay: 0.2s;">
+          Cut through the noise – discover the ten most influential studies delivered straight to your inbox.
+        </p>
+        <p class="fade-in-up" style="animation-delay: 0.4s;">
+          No cost, no hassle—just valuable insights every week.
+        </p>
+      </section>
 
-    <!-- Call-to-Action Form -->
-    <div class="cta-form-container" id="signup-form">
-      <form class="cta-form">
-        <input type="email" id="email-input" placeholder="you@example.com" required>
-        <select id="interest-select" required>
-          <option value="">Select your main area of interest</option>
-          <option value="Agricultural Sciences">Agricultural Sciences</option>
-          <option value="Arts & Humanities">Arts & Humanities</option>
-          <option value="Biology & Biochemistry">Biology & Biochemistry</option>
-          <option value="Chemistry">Chemistry</option>
-          <option value="Clinical Medicine">Clinical Medicine</option>
-          <option value="Computer Science">Computer Science</option>
-          <option value="Economics & Business">Economics & Business</option>
-          <option value="Engineering">Engineering</option>
-          <option value="Environment and Ecology">Environment and Ecology</option>
-          <option value="Geosciences">Geosciences</option>
-          <option value="History & Archaeology">History & Archaeology</option>
-          <option value="Literature & Language">Literature & Language</option>
-          <option value="Materials Science">Materials Science</option>
-          <option value="Mathematics">Mathematics</option>
-          <option value="Philosophy & Religion">Philosophy & Religion</option>
-          <option value="Physics">Physics</option>
-          <option value="Plant & Animal Science">Plant & Animal Science</option>
-          <option value="Psychiatry and Psychology">Psychiatry and Psychology</option>
-          <option value="Social Sciences">Social Sciences</option>
-          <option value="Visual & Performing Arts">Visual & Performing Arts</option>
-        </select>
-        <select id="sub-interest-select" required>
-          <option value="">Select sub-interest</option>
-          <!-- Options will be dynamically populated -->
-        </select>
-        <button type="submit" class="cta-button">Join for free!</button>
-         <!-- GDPR-compliant Terms of Service agreement checkbox -->
-         <div class="tos-agreement">
-          <input type="checkbox" id="tos-checkbox" required>
-          <label for="tos-checkbox">
-            I agree to the <a href="/terms.html" target="_blank">Terms of Service</a> and
-            <a href="/privacy.html" target="_blank">Privacy Policy</a>.
-          </label>
-        </div>
-      </form>
-    </div>
+      <!-- Call-to-Action Form -->
+      <div class="cta-form-container" id="signup-form">
+        <form class="cta-form">
+          <input type="email" id="email-input" placeholder="you@example.com" required>
+          <select id="interest-select" required>
+            <option value="">Select your main area of interest</option>
+            <option value="Agricultural Sciences">Agricultural Sciences</option>
+            <option value="Arts & Humanities">Arts & Humanities</option>
+            <option value="Biology & Biochemistry">Biology & Biochemistry</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Clinical Medicine">Clinical Medicine</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Economics & Business">Economics & Business</option>
+            <option value="Engineering">Engineering</option>
+            <option value="Environment and Ecology">Environment and Ecology</option>
+            <option value="Geosciences">Geosciences</option>
+            <option value="History & Archaeology">History & Archaeology</option>
+            <option value="Literature & Language">Literature & Language</option>
+            <option value="Materials Science">Materials Science</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Philosophy & Religion">Philosophy & Religion</option>
+            <option value="Physics">Physics</option>
+            <option value="Plant & Animal Science">Plant & Animal Science</option>
+            <option value="Psychiatry and Psychology">Psychiatry and Psychology</option>
+            <option value="Social Sciences">Social Sciences</option>
+            <option value="Visual & Performing Arts">Visual & Performing Arts</option>
+          </select>
+          <select id="sub-interest-select" required>
+            <option value="">Select sub-interest</option>
+            <!-- Options will be dynamically populated -->
+          </select>
+          <button type="submit" class="cta-button">Join for free!</button>
+           <!-- GDPR-compliant Terms of Service agreement checkbox -->
+           <div class="tos-agreement">
+            <input type="checkbox" id="tos-checkbox" required>
+            <label for="tos-checkbox">
+              I agree to the <a href="/terms.html" target="_blank">Terms of Service</a> and
+              <a href="/privacy.html" target="_blank">Privacy Policy</a>.
+            </label>
+          </div>
+        </form>
+      </div>
 
-    <!-- Features Section -->
-    <section id="features" class="features">
-      <div class="container">
+      <!-- Features Section -->
+      <section id="features" class="features">
         <div class="features-grid stagger-fade-in">
           <div class="feature-box">
             <h3>Field-Specific</h3>
@@ -152,39 +718,36 @@
             <p>High-value research, at zero cost.</p>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Scrolling Banner -->
-    <section class="scrolling-banner">
-      <div class="banner-content" id="banner-content">
-        <span>Agricultural Sciences</span>
-        <span>Arts & Humanities</span>
-        <span>Biology & Biochemistry</span>
-        <span>Chemistry</span>
-        <span>Clinical Medicine</span>
-        <span>Computer Science</span>
-        <span>Economics & Business</span>
-        <span>Engineering</span>
-        <span>Environment and Ecology</span>
-        <span>Geosciences</span>
-        <span>History & Archaeology</span>
-        <span>Literature & Language</span>
-        <span>Materials Science</span>
-        <span>Mathematics</span>
-        <span>Philosophy & Religion</span>
-        <span>Physics</span>
-        <span>Plant & Animal Science</span>
-        <span>Psychiatry and Psychology</span>
-        <span>Social Sciences</span>
-        <span>Visual & Performing Arts</span>
-      </div>
-    </section>
+      <!-- Scrolling Banner -->
+      <section class="scrolling-banner">
+        <div class="banner-content" id="banner-content">
+          <span>Agricultural Sciences</span>
+          <span>Arts & Humanities</span>
+          <span>Biology & Biochemistry</span>
+          <span>Chemistry</span>
+          <span>Clinical Medicine</span>
+          <span>Computer Science</span>
+          <span>Economics & Business</span>
+          <span>Engineering</span>
+          <span>Environment and Ecology</span>
+          <span>Geosciences</span>
+          <span>History & Archaeology</span>
+          <span>Literature & Language</span>
+          <span>Materials Science</span>
+          <span>Mathematics</span>
+          <span>Philosophy & Religion</span>
+          <span>Physics</span>
+          <span>Plant & Animal Science</span>
+          <span>Psychiatry and Psychology</span>
+          <span>Social Sciences</span>
+          <span>Visual & Performing Arts</span>
+        </div>
+      </section>
 
-    <!-- How It Works Section -->
-    <section id="how-it-works" class="how">
-      <div class="container">
-        <h2>How It Works</h2>
+      <!-- How It Works Section -->
+      <section id="how-it-works" class="how">
         <div class="steps-container">
           <div class="step">
             <div class="step-icon"><i class="fas fa-search"></i></div>
@@ -207,162 +770,225 @@
             <p>Keep up with cutting-edge research effortlessly.</p>
           </div>
         </div>
+      </section>
+
+      <div class="testimonial">
+        <p>"StayAhead has revolutionized how I keep up with research in my field. It's an invaluable time-saver!"</p>
+        - Dr. Jane Smith, Neuroscientist
       </div>
-    </section>
+      <!-- Newsletter Preview Section -->
+      <section id="newsletter-preview" class="how">
+        <div class="newsletter-preview-header">
+          <h2>A Glimpse of Our Weekly Newsletter</h2>
+          <div class="testimonial">
+            <p>Below is an exact sample of what is delivered to your inbox each week. This subscriber selected Clinical Medicine as field and Oncology as a subcategory</p>
+          </div>
+        </div>
 
-    <div class="testimonial">
-      <p>"StayAhead has revolutionized how I keep up with research in my field. It's an invaluable time-saver!"</p>
-      - Dr. Jane Smith, Neuroscientist
-    </div>
-    <!-- Newsletter Preview Section -->
-<!-- Newsletter Preview Section -->
-<section id="newsletter-preview" class="how">
-  <div class="newsletter-preview-header">
-    <h2>A Glimpse of Our Weekly Newsletter</h2>
-    <div class="testimonial">
-    <p>Below is an exact sample of what is delivered to your inbox each week. This subscriber selected Clinical Medicine as field and Oncology as a subcategory </p></div>
-  </div>
+        <!-- Phone Mock Container -->
+        <div class="mock-phone-container">
+          <div class="mock-phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <!-- Newsletter content goes here -->
+              <div class="email-preview">
+                <!-- Header -->
+                <div class="email-header">
+                  <h3>Trending Clinical Medicine - Oncology Articles - 2025-02-09</h3>
+                  <p>Your weekly roundup of trending Oncology articles in Clinical Medicine</p>
+                </div>
 
-  <!-- Inline-styled container to isolate the email snippet's appearance -->
-  <div class="newsletter-email-container" style="
-      max-width: 600px;
-      margin: 20px auto;
-      background: #ffffff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      font-family: Arial, sans-serif;
-      color: #333;
-    ">
+                <!-- Content -->
+                <div class="email-content">
+                  <p>Dear Subscriber,</p>
+                  <p>Below are the top trending Oncology articles in Clinical Medicine for the past 7 days:</p>
 
-    <!-- Header -->
-    <div class="newsletter-email-header" style="
-        background-color: #2c3e50;
-        color: #fff;
-        padding: 20px;
-        text-align: center;
-      ">
-      <h3 style="margin: 0; font-size: 24px;">
-        Trending Clinical Medicine - Oncology Articles - 2025-02-09
-      </h3>
-      <p style="margin: 5px 0;">
-        Your weekly roundup of trending Oncology articles in Clinical Medicine
-      </p>
-    </div>
+                  <!-- Example article items -->
+                  <div class="email-article">
+                    <h4>
+                      <a href="https://doi.org/10.1016/s1470-2045(25)00033-6">
+                        UK's National Cancer Plan needs to be radical, accountable, and deliverable
+                      </a>
+                    </h4>
+                    <p><strong>Journal:</strong> The Lancet Oncology</p>
+                    <p><strong>Publishing Date:</strong> 03 February 2025</p>
+                  </div>
 
-    <!-- Content -->
-    <div class="newsletter-email-content" style="padding: 20px;">
-      <p>Dear Subscriber,</p>
-      <p>
-        Below are the top trending Oncology articles in Clinical Medicine for the past 7 days:
-      </p>
+                  <div class="email-article">
+                    <h4>
+                      <a href="https://doi.org/10.1158/1078-0432.ccr-24-2386">
+                        NXP800 Activates the Unfolded Protein Response...
+                      </a>
+                    </h4>
+                    <p><strong>Journal:</strong> Clinical Cancer Research</p>
+                    <p><strong>Publishing Date:</strong> 06 February 2025</p>
+                  </div>
 
-      <!-- Example article item -->
-      <div class="newsletter-article" style="border-bottom: 1px solid #eee; padding: 10px 0;">
-        <h4 style="margin: 0 0 5px; font-size: 18px;">
-          <a href="https://doi.org/10.1016/s1470-2045(25)00033-6" style="color: #2980b9; text-decoration: none;">
-            UK's National Cancer Plan needs to be radical, accountable, and deliverable
-          </a>
-        </h4>
-        <p style="margin: 5px 0; font-size: 14px; color: #555;">
-          <strong>Journal:</strong> The Lancet Oncology
-        </p>
-        <p style="margin: 5px 0; font-size: 14px; color: #555;">
-          <strong>Publishing Date:</strong> 03 February 2025
-        </p>
-      </div>
+                  <div class="email-article">
+                    <h4>
+                      <a href="https://doi.org/10.3322/caac.21871">
+                        Cancer statistics, 2025
+                      </a>
+                    </h4>
+                    <p><strong>Journal:</strong> CA: A Cancer Journal for Clinicians</p>
+                    <p><strong>Publishing Date:</strong> January 2025</p>
+                  </div>
 
-      <!-- Repeat for each article... -->
-      <div class="newsletter-article" style="border-bottom: 1px solid #eee; padding: 10px 0;">
-        <h4 style="margin: 0 0 5px; font-size: 18px;">
-          <a href="https://doi.org/10.1158/1078-0432.ccr-24-2386" style="color: #2980b9; text-decoration: none;">
-            NXP800 Activates the Unfolded Protein Response...
-          </a>
-        </h4>
-        <p style="margin: 5px 0; font-size: 14px; color: #555;">
-          <strong>Journal:</strong> Clinical Cancer Research
-        </p>
-        <p style="margin: 5px 0; font-size: 14px; color: #555;">
-          <strong>Publishing Date:</strong> 06 February 2025
-        </p>
-      </div>
+                  <p>We hope these articles inspire new insights and robust discussions in your research.</p>
+                  <p>Best regards,<br>Your Research Trends Team</p>
+                </div>
 
-    <!-- Additional Articles, Formatted Consistently -->
-<div class="newsletter-article" style="border-bottom: 1px solid #eee; padding: 10px 0;">
-  <h4 style="margin: 0 0 5px; font-size: 18px;">
-    <a href="https://doi.org/10.3322/caac.21871" style="color: #2980b9; text-decoration: none;">
-      Cancer statistics, 2025
-    </a>
-  </h4>
-  <p style="margin: 5px 0; font-size: 14px; color: #555;">
-    <strong>Journal:</strong> CA: A Cancer Journal for Clinicians
-  </p>
-  <p style="margin: 5px 0; font-size: 14px; color: #555;">
-    <strong>Publishing Date:</strong> January 2025
-  </p>
-</div>
+                <!-- Footer -->
+                <div class="email-footer">
+                  <p>You are receiving this email because you subscribed to the newsletter.</p>
+                  <p>
+                    <a href="#">Unsubscribe</a> |
+                    <a href="#">Manage Preferences</a>
+                  </p>
+                  <p>&copy; 2025 StayAhead! All rights reserved.</p>
+                </div>
+              </div>
+            </div>
+            <div class="phone-button"></div>
+          </div>
+        </div>
 
-<div class="newsletter-article" style="border-bottom: 1px solid #eee; padding: 10px 0;">
-  <h4 style="margin: 0 0 5px; font-size: 18px;">
-    <a href="https://doi.org/10.1002/cncr.35673" style="color: #2980b9; text-decoration: none;">
-      Impact of obesity on outcome in children diagnosed with cancer in Canada:
-      A report from Cancer in Young People in Canada
-    </a>
-  </h4>
-  <p style="margin: 5px 0; font-size: 14px; color: #555;">
-    <strong>Journal:</strong> Cancer
-  </p>
-  <p style="margin: 5px 0; font-size: 14px; color: #555;">
-    <strong>Publishing Date:</strong> 13 January 2025
-  </p>
-</div>
+        <!-- Add the CSS styles for the mock phone -->
+        <style>
+          .mock-phone-container {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+            perspective: 1000px;
+          }
+          
+          .mock-phone {
+            width: 320px;
+            height: 650px;
+            background: #111;
+            border-radius: 36px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border: 8px solid #111;
+            transform: rotateY(-5deg) rotateX(5deg);
+            transition: transform 0.5s ease;
+          }
+          
+          .mock-phone:hover {
+            transform: rotateY(0) rotateX(0);
+          }
+          
+          .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 30px;
+            background: #111;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            z-index: 10;
+          }
+          
+          .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: white;
+            overflow-y: auto;
+            position: relative;
+          }
+          
+          .phone-button {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+          }
+          
+          /* Email styling */
+          .email-preview {
+            padding: 30px 0 0;
+            font-family: Arial, sans-serif;
+            color: #333;
+          }
+          
+          .email-header {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+          }
+          
+          .email-header h3 {
+            margin: 0;
+            font-size: 18px;
+            color: white;
+          }
+          
+          .email-header p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+          }
+          
+          .email-content {
+            padding: 20px;
+            font-size: 14px;
+          }
+          
+          .email-article {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+          }
+          
+          .email-article h4 {
+            margin: 0 0 5px;
+            font-size: 16px;
+          }
+          
+          .email-article a {
+            color: #2980b9;
+            text-decoration: none;
+          }
+          
+          .email-article p {
+            margin: 5px 0;
+            font-size: 12px;
+            color: #555;
+          }
+          
+          .email-footer {
+            background-color: #ecf0f1;
+            padding: 15px;
+            text-align: center;
+            font-size: 12px;
+            color: #7f8c8d;
+          }
+          
+          .email-footer a {
+            color: #2980b9;
+            text-decoration: none;
+          }
+          
+          /* Make the phone responsive */
+          @media (max-width: 768px) {
+            .mock-phone {
+              width: 280px;
+              height: 580px;
+              transform: none;
+            }
+          }
+        </style>
+      </section>
 
-<div class="newsletter-article" style="border-bottom: 1px solid #eee; padding: 10px 0;">
-  <h4 style="margin: 0 0 5px; font-size: 18px;">
-    <a href="https://doi.org/10.1038/s43018-024-00900-3" style="color: #2980b9; text-decoration: none;">
-      TRIM28-dependent developmental heterogeneity determines cancer susceptibility
-      through distinct epigenetic states
-    </a>
-  </h4>
-  <p style="margin: 5px 0; font-size: 14px; color: #555;">
-    <strong>Journal:</strong> Nature Cancer
-  </p>
-  <p style="margin: 5px 0; font-size: 14px; color: #555;">
-    <strong>Publishing Date:</strong> 24 January 2025
-  </p>
-</div>
-      <p>
-        We hope these articles inspire new insights and robust discussions in your research.
-      </p>
-      <p>
-        Best regards,<br />
-        Your Research Trends Team
-      </p>
-    </div>
-
-    <!-- Footer -->
-    <div class="newsletter-email-footer" style="
-        background-color: #ecf0f1;
-        padding: 15px;
-        text-align: center;
-        font-size: 12px;
-        color: #7f8c8d;
-      ">
-      <p>You are receiving this email because you subscribed to the newsletter.</p>
-      <p>
-        <a href="#" style="color: #2980b9; text-decoration: none;">Unsubscribe</a> |
-        <a href="#" style="color: #2980b9; text-decoration: none;">Manage Preferences</a>
-      </p>
-      <p>&copy; 2025 StayAhead! All rights reserved.</p>
-    </div>
-  </div>
-</section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="how">
-      <div class="container">
-        <h2>What Our Users Say</h2>
+      <!-- Testimonials Section -->
+      <section id="testimonials" class="how">
         <div class="testimonial">
           <p>"StayAhead has revolutionized how I keep up with research in my field. It's an invaluable time-saver!"</p>
           - Dr. Jane Smith, Neuroscientist
@@ -371,13 +997,10 @@
           <p>"This service helps me stay on top of the latest developments without spending hours searching."</p>
           - Mike Johnson, Ph.D. Candidate
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- FAQ Section -->
-    <section id="faq" class="how">
-      <div class="container">
-        <h2>Frequently Asked Questions</h2>
+      <!-- FAQ Section -->
+      <section id="faq" class="how">
         <div class="faq-list">
           <div class="faq-item">
             <button class="faq-question">
@@ -407,42 +1030,42 @@
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Footer Section -->
-    <footer class="site-footer">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>About StayAhead</h3>
-          <p>StayAhead delivers curated research papers to keep you informed and ahead in your field.</p>
+      <!-- Footer Section -->
+      <footer class="site-footer">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>About StayAhead</h3>
+            <p>StayAhead delivers curated research papers to keep you informed and ahead in your field.</p>
+          </div>
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#how-it-works">How It Works</a></li>
+              <li><a href="#faq">FAQ</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Legal</h3>
+            <ul>
+              <li><a href="/terms.html">Terms of Service</a></li>
+              <li><a href="/privacy.html">Privacy Policy</a></li>
+              <li><a href="/cookies.html">Cookie Policy</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Newsletter</h3>
+            <p>soon</p>
+         
+          </div>
         </div>
-        <div class="footer-section">
-          <h3>Quick Links</h3>
-          <ul>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#how-it-works">How It Works</a></li>
-            <li><a href="#faq">FAQ</a></li>
-          </ul>
+        <div class="footer-bottom">
+          <p>&copy; 2025 StayAhead. All rights reserved.</p>
         </div>
-        <div class="footer-section">
-          <h3>Legal</h3>
-          <ul>
-            <li><a href="/terms.html">Terms of Service</a></li>
-            <li><a href="/privacy.html">Privacy Policy</a></li>
-            <li><a href="/cookies.html">Cookie Policy</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Newsletter</h3>
-          <p>soon</p>
-       
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 StayAhead. All rights reserved.</p>
-      </div>
-    </footer>
+      </footer>
+    </div>
   </div>
 
   <!-- JavaScript -->
@@ -547,6 +1170,39 @@ $('#sub-interest-select').select2({
           icon.classList.toggle('fa-chevron-down');
           icon.classList.toggle('fa-chevron-up');
         });
+      });
+    });
+  </script>
+  <script>
+    // Mobile menu toggle
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+      const mainMenu = document.getElementById('main-menu');
+      mainMenu.classList.toggle('active');
+      this.setAttribute('aria-expanded', mainMenu.classList.contains('active'));
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if(targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if(!targetElement) return;
+        
+        const headerHeight = document.querySelector('.site-header').offsetHeight;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+        
+        // Close mobile menu if it's open
+        document.getElementById('main-menu').classList.remove('active');
+        document.querySelector('.menu-toggle').setAttribute('aria-expanded', 'false');
       });
     });
   </script>
