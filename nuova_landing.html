@@ -97,24 +97,106 @@
 
         .form-container {
             width: 100%;
-            max-width: 500px;
-            max-height: 95vh;
-            background-color: rgba(255, 255, 255, 0.05);
+            max-width: 900px;
+            background-color: rgba(23, 37, 69, 0.7);
             backdrop-filter: blur(10px);
-            border-radius: var(--radius);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            padding: calc(var(--padding) * 0.8);
-            animation: fade-in 1s ease-out;
+            border-radius: 12px;
+            padding: 3rem;
+            margin: 0 auto;
+        }
+
+        .form-container h1 {
+            font-size: 3rem;
+            text-align: left;
+            color: #5d8efa;
+            margin-bottom: 1rem;
+            -webkit-text-fill-color: #5d8efa;
+        }
+        
+        .form-container p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Form styling */
+        .cta-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .cta-form input[type="email"],
+        .cta-form select,
+        .cta-form button {
+            height: 60px;
+            border-radius: 8px;
+            padding: 0 1rem;
+            font-size: 1rem;
+            background-color: rgba(40, 54, 87, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            overflow: auto;
-            will-change: transform, opacity;
-            transform: translateZ(0);
+            color: white;
+        }
+        
+        .cta-form input::placeholder,
+        .cta-form select::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .cta-form button {
+            background: #5d8efa;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            font-size: 1.2rem;
+        }
+        
+        /* TOS styling to match screenshot */
+        .tos-agreement {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        
+        .tos-agreement input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #5d8efa;
+        }
+        
+        .tos-agreement label {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .tos-agreement a {
+            color: #5d8efa;
+            text-decoration: none;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .cta-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-container {
+                padding: 2rem;
+            }
+            
+            .form-container h1 {
+                font-size: 2rem;
+            }
         }
 
         .preview-container {
             position: relative;
             width: 100%;
             max-width: 450px;
+            contain: layout style paint;
         }
 
         @keyframes fade-in {
@@ -257,12 +339,9 @@
             width: 260px;
             height: 520px;
             margin-top: 0;
-            perspective: 1000px;
-            transform-style: preserve-3d;
             transform: rotateY(-10deg) rotateX(5deg);
             transition: transform 0.5s ease;
-            will-change: transform;
-            transform: translateZ(0);
+            contain: layout style;
         }
 
         .phone-container:hover {
@@ -276,9 +355,9 @@
             background-color: #111;
             border-radius: 36px;
             overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3),
-                        0 0 0 2px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
             padding: 12px;
+            contain: content;
         }
 
         .phone-screen {
@@ -297,6 +376,8 @@
             color: #333;
             overflow-y: auto;
             font-family: Arial, sans-serif;
+            transform: translateZ(0);
+            contain: content;
         }
 
         .email-container {
@@ -587,8 +668,7 @@
         }
         
         .glass-footer {
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(5px);
+            background: #0f172a;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.1);
             width: 100%;
@@ -598,8 +678,7 @@
             display: block;
             min-height: 300px;
             clear: both;
-            will-change: transform;
-            transform: translateZ(0);
+            content-visibility: auto;
         }
         
         .footer-container {
@@ -1363,6 +1442,230 @@
                 margin-bottom: 0.5rem;
             }
         }
+
+        /* Hide the original footer */
+        .glass-footer {
+            display: none !important;
+        }
+        
+        /* Simple footer styles */
+        .simple-footer {
+            background: #0f172a;
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 4rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .simple-footer .copyright {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Add this CSS rule to disable animations while scrolling */
+        .is-scrolling .phone-container {
+            transition: none !important;
+            animation: none !important;
+            transform: none !important;
+        }
+
+        /* Single viewport layout styles */
+        body {
+            height: 100vh;
+            overflow: hidden;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+        }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            height: 100%;
+            padding: 1rem 2rem;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            justify-content: center;
+        }
+
+        .form-container {
+            max-height: calc(100vh - 160px);
+            width: 100%;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .preview-container {
+            justify-self: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            margin-bottom: 0.25rem;
+            display: block;
+        }
+
+        input, select, button {
+            padding: 0.6rem 1rem;
+        }
+
+        .simplified-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 2rem;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(5px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-link:hover {
+            color: #fff;
+        }
+
+        /* Mobile view scrolling is enabled */
+        @media (max-width: 1024px) {
+            body {
+                height: auto;
+                overflow: auto;
+                display: block;
+            }
+
+            .main-container {
+                grid-template-columns: 1fr;
+                height: auto;
+                padding: 1rem;
+                margin-top: 5rem;
+            }
+
+            .form-container, .preview-container {
+                max-height: none;
+            }
+
+            .simplified-footer {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1.5rem;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        /* Updated form styles to match index.html */
+        .cta-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .cta-form input[type="email"],
+        .cta-form select, 
+        .cta-form button {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 4px;
+            font-size: 16px;
+            border: 1px solid rgba(248, 250, 252, 0.2);
+        }
+        
+        .cta-form button {
+            background: var(--accent-gradient);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: auto;
+        }
+        
+        .cta-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        .tos-agreement {
+            margin-top: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .tos-agreement input[type="checkbox"] {
+            margin-top: 3px;
+        }
+        
+        .tos-agreement label {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        /* For larger screens, make the form horizontal */
+        @media (min-width: 768px) {
+            .cta-form {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .cta-form input[type="email"] {
+                flex: 2;
+            }
+            
+            .cta-form select {
+                flex: 1.5;
+            }
+            
+            .cta-form button {
+                flex: 1;
+                min-width: 150px;
+            }
+            
+            .tos-agreement {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1429,125 +1732,109 @@
         </div>
     </nav>
 
-    <div class="content-container">
-        <h1 class="page-title">Stay Ahead in Medical Research</h1>
-        <p class="page-subtitle">Get personalized, AI-curated updates from <span class="highlight">top medical journals</span> straight to your inbox. Join 12,000+ healthcare professionals who trust StayAhead.</p>
-        
-        <div class="two-column-layout">
-            <div class="form-container">
-                <h1>Join Our Research Updates</h1>
-                <p>Sign up to receive the latest medical research articles in your specialty. Stay informed with our curated content delivered directly to your inbox.</p>
+    <div class="main-container">
+        <div class="form-container">
+            <h1>Stay Ahead with Curated Research Updates</h1>
+            <p>Join 12,000+ professionals receiving personalized research updates in their field. Never miss the latest developments.</p>
+            
+            <form class="cta-form">
+                <input type="email" id="email-input" placeholder="you@example.com" required>
                 
-                <form class="cta-form" id="signup-form">
-                    <div class="form-group">
-                        <label for="email-input">Email Address</label>
-                        <input type="email" id="email-input" placeholder="you@example.com" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="interest-select">Medical Specialty</label>
-                        <select id="interest-select" required>
-                            <option value="">Select your main area of interest</option>
-                            <option value="Agricultural Sciences">Agricultural Sciences</option>
-                            <option value="Arts & Humanities">Arts & Humanities</option>
-                            <option value="Biology & Biochemistry">Biology & Biochemistry</option>
-                            <option value="Chemistry">Chemistry</option>
-                            <option value="Clinical Medicine">Clinical Medicine</option>
-                            <option value="Computer Science">Computer Science</option>
-                            <option value="Economics & Business">Economics & Business</option>
-                            <option value="Engineering">Engineering</option>
-                            <option value="Environment and Ecology">Environment and Ecology</option>
-                            <option value="Geosciences">Geosciences</option>
-                            <option value="History & Archaeology">History & Archaeology</option>
-                            <option value="Literature & Language">Literature & Language</option>
-                            <option value="Materials Science">Materials Science</option>
-                            <option value="Mathematics">Mathematics</option>
-                            <option value="Philosophy & Religion">Philosophy & Religion</option>
-                            <option value="Physics">Physics</option>
-                            <option value="Plant & Animal Science">Plant & Animal Science</option>
-                            <option value="Psychiatry and Psychology">Psychiatry and Psychology</option>
-                            <option value="Social Sciences">Social Sciences</option>
-                            <option value="Visual & Performing Arts">Visual & Performing Arts</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="sub-interest-select">Sub-Specialty</label>
-                        <select id="sub-interest-select" required>
-                            <option value="">Select sub-interest</option>
-                            <!-- Options will be dynamically populated -->
-                        </select>
-                    </div>
-                    
-                    <div class="form-group tos-container">
-                        <div class="tos-agreement">
-                            <input type="checkbox" id="tos-checkbox" required>
-                            <label for="tos-checkbox">
-                                I agree to the <a href="/terms.html" target="_blank">Terms of Service</a> and
-                                <a href="/privacy.html" target="_blank">Privacy Policy</a>.
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <button type="submit" id="subscribe-button">Join for free!</button>
-                </form>
+                <select id="interest-select" required>
+                    <option value="">Select your main area of interest</option>
+                    <option value="Agricultural Sciences">Agricultural Sciences</option>
+                    <option value="Arts & Humanities">Arts & Humanities</option>
+                    <option value="Biology & Biochemistry">Biology & Biochemistry</option>
+                    <option value="Chemistry">Chemistry</option>
+                    <option value="Clinical Medicine">Clinical Medicine</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Economics & Business">Economics & Business</option>
+                    <option value="Engineering">Engineering</option>
+                    <option value="Environment and Ecology">Environment and Ecology</option>
+                    <option value="Geosciences">Geosciences</option>
+                    <option value="History & Archaeology">History & Archaeology</option>
+                    <option value="Literature & Language">Literature & Language</option>
+                    <option value="Materials Science">Materials Science</option>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Philosophy & Religion">Philosophy & Religion</option>
+                    <option value="Physics">Physics</option>
+                    <option value="Plant & Animal Science">Plant & Animal Science</option>
+                    <option value="Psychiatry and Psychology">Psychiatry and Psychology</option>
+                    <option value="Social Sciences">Social Sciences</option>
+                    <option value="Visual & Performing Arts">Visual & Performing Arts</option>
+                </select>
                 
-                <div class="success-message" id="success-message">
-                    Thanks for subscribing! You'll receive your first update soon.
+                <select id="sub-interest-select" required>
+                    <option value="">Select sub-interest</option>
+                    <!-- Will be populated dynamically -->
+                </select>
+                
+                <button type="submit">Join for free!</button>
+                
+                <div class="tos-agreement">
+                    <input type="checkbox" id="tos-checkbox" required>
+                    <label for="tos-checkbox">
+                        I agree to the <a href="/terms.html" target="_blank">Terms of Service</a> and
+                        <a href="/privacy.html" target="_blank">Privacy Policy</a>.
+                    </label>
                 </div>
-                
-                <div class="error-message" id="error-message">
-                    There was an error processing your request. Please try again.
-                </div>
+            </form>
+            
+            <div class="success-message" id="success-message">
+                Thanks for subscribing! You'll receive your first update soon.
             </div>
+            
+            <div class="error-message" id="error-message">
+                There was an error processing your request. Please try again.
+            </div>
+        </div>
 
-            <div class="preview-container">
-                <div class="preview-label">Preview on your device</div>
-                <div class="phone-container">
-                    <div class="phone">
-                        <div class="phone-screen">
-                            <div class="email-preview">
-                                <div class="email-container">
-                                    <div class="email-header">
-                                        <h1>Trending Clinical Medicine - <span id="preview-interest">Oncology</span> Articles - 2025-02-24</h1>
-                                        <p>Your <span id="preview-frequency">weekly</span> roundup of trending <span id="preview-interest2">Oncology</span> articles in Clinical Medicine</p>
+        <div class="preview-container">
+            <div class="preview-label">Preview on your device</div>
+            <div class="phone-container">
+                <div class="phone">
+                    <div class="phone-screen">
+                        <div class="email-preview">
+                            <div class="email-container">
+                                <div class="email-header">
+                                    <h1>Trending Clinical Medicine - <span id="preview-interest">Oncology</span> Articles - 2025-02-24</h1>
+                                    <p>Your <span id="preview-frequency">weekly</span> roundup of trending <span id="preview-interest2">Oncology</span> articles in Clinical Medicine</p>
+                                </div>
+                                <div class="email-content">
+                                    <p>Dear Colleague,</p>
+                                    <p>Below are the top trending <span id="preview-interest3">Oncology</span> articles in Clinical Medicine for the past 7 days:</p>
+                                    
+                                    <div class="article">
+                                        <h2><a href="#">UK's National Cancer Plan needs to be radical, accountable, and deliverable</a></h2>
+                                        <p><strong>Journal:</strong> The Lancet Oncology</p>
+                                        <p><strong>Publishing Date:</strong> February 2025</p>
                                     </div>
-                                    <div class="email-content">
-                                        <p>Dear Colleague,</p>
-                                        <p>Below are the top trending <span id="preview-interest3">Oncology</span> articles in Clinical Medicine for the past 7 days:</p>
-                                        
-                                        <div class="article">
-                                            <h2><a href="#">UK's National Cancer Plan needs to be radical, accountable, and deliverable</a></h2>
-                                            <p><strong>Journal:</strong> The Lancet Oncology</p>
-                                            <p><strong>Publishing Date:</strong> February 2025</p>
-                                        </div>
-                                        
-                                        <div class="article">
-                                            <h2><a href="#">NXP800 Activates the Unfolded Protein Response, Altering AR and E2F Function</a></h2>
-                                            <p><strong>Journal:</strong> Clinical Cancer Research</p>
-                                            <p><strong>Publishing Date:</strong> 06 February 2025</p>
-                                        </div>
-                                        
-                                        <div class="article">
-                                            <h2><a href="#">Cancer statistics, 2025</a></h2>
-                                            <p><strong>Journal:</strong> CA: A Cancer Journal for Clinicians</p>
-                                            <p><strong>Publishing Date:</strong> January 2025</p>
-                                        </div>
-                                        
-                                        <div class="article">
-                                            <h2><a href="#">Impact of obesity on outcome in children diagnosed with cancer in Canada</a></h2>
-                                            <p><strong>Journal:</strong> Cancer</p>
-                                            <p><strong>Publishing Date:</strong> 13 January 2025</p>
-                                        </div>
-                                        
-                                        <p>We hope these articles inspire new insights and robust discussions in your research.</p>
-                                        <p>Best regards,<br>Your Research Trends Team</p>
+                                    
+                                    <div class="article">
+                                        <h2><a href="#">NXP800 Activates the Unfolded Protein Response, Altering AR and E2F Function</a></h2>
+                                        <p><strong>Journal:</strong> Clinical Cancer Research</p>
+                                        <p><strong>Publishing Date:</strong> 06 February 2025</p>
                                     </div>
-                                    <div class="email-footer">
-                                        <p>You are receiving this email because you subscribed to the newsletter.</p>
-                                        <p><a href="#">Unsubscribe</a> | <a href="#">Manage Preferences</a></p>
-                                        <p>&copy; 2025 Research Trends Inc. All rights reserved.</p>
+                                    
+                                    <div class="article">
+                                        <h2><a href="#">Cancer statistics, 2025</a></h2>
+                                        <p><strong>Journal:</strong> CA: A Cancer Journal for Clinicians</p>
+                                        <p><strong>Publishing Date:</strong> January 2025</p>
                                     </div>
+                                    
+                                    <div class="article">
+                                        <h2><a href="#">Impact of obesity on outcome in children diagnosed with cancer in Canada</a></h2>
+                                        <p><strong>Journal:</strong> Cancer</p>
+                                        <p><strong>Publishing Date:</strong> 13 January 2025</p>
+                                    </div>
+                                    
+                                    <p>We hope these articles inspire new insights and robust discussions in your research.</p>
+                                    <p>Best regards,<br>Your Research Trends Team</p>
+                                </div>
+                                <div class="email-footer">
+                                    <p>You are receiving this email because you subscribed to the newsletter.</p>
+                                    <p><a href="#">Unsubscribe</a> | <a href="#">Manage Preferences</a></p>
+                                    <p>&copy; 2025 Research Trends Inc. All rights reserved.</p>
                                 </div>
                             </div>
                         </div>
@@ -1557,133 +1844,40 @@
         </div>
     </div>
 
-    <footer class="glass-footer">
-        <div class="footer-container">
-            <div class="footer-top">
-                <div class="footer-brand">
-                    <div class="footer-logo">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
-                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="url(#paint0_linear)" stroke-width="2" stroke-linejoin="round"/>
-                            <path d="M2 17L12 22L22 17" stroke="url(#paint1_linear)" stroke-width="2" stroke-linejoin="round"/>
-                            <path d="M2 12L12 17L22 12" stroke="url(#paint2_linear)" stroke-width="2" stroke-linejoin="round"/>
-                            <defs>
-                                <linearGradient id="paint0_linear" x1="2" y1="7" x2="22" y2="7" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#3B82F6"/>
-                                    <stop offset="1" stop-color="#8B5CF6"/>
-                                </linearGradient>
-                                <linearGradient id="paint1_linear" x1="2" y1="19.5" x2="22" y2="19.5" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#3B82F6"/>
-                                    <stop offset="1" stop-color="#8B5CF6"/>
-                                </linearGradient>
-                                <linearGradient id="paint2_linear" x1="2" y1="14.5" x2="22" y2="14.5" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#3B82F6"/>
-                                    <stop offset="1" stop-color="#8B5CF6"/>
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                        <span>StayAhead</span>
-                    </div>
-                    <p>Delivering curated medical research updates to keep healthcare professionals informed in their specialty.</p>
-                    
-                    <div class="footer-newsletter">
-                        <h4>Join 12,000+ subscribers</h4>
-                        <div class="newsletter-form">
-                            <input type="email" placeholder="Enter your email" aria-label="Email for newsletter">
-                            <button type="button" class="newsletter-button">
-                                <span>Subscribe</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4>Platform</h4>
-                        <a href="#">How it Works</a>
-                        <a href="#">Research Sources</a>
-                        <a href="#">AI Curation</a>
-                        <a href="#">For Institutions</a>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Resources</h4>
-                        <a href="#">Medical Specialties</a>
-                        <a href="#" class="new-tag">Research Database</a>
-                        <a href="#">API Access</a>
-                        <a href="#">Help Center</a>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Company</h4>
-                        <a href="#">About Us</a>
-                        <a href="#" class="new-tag">Careers</a>
-                        <a href="#">Blog</a>
-                        <a href="#">Contact</a>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Legal</h4>
-                        <a href="#">Privacy Policy</a>
-                        <a href="#">Terms of Service</a>
-                        <a href="#">Cookie Policy</a>
-                        <a href="#">GDPR Compliance</a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="footer-middle">
-                <div class="trust-badges">
-                    <div class="badge">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                        <span>HIPAA Compliant</span>
-                    </div>
-                    <div class="badge">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                        <span>256-bit Encryption</span>
-                    </div>
-                    <div class="badge">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
-                        <span>SOC 2 Certified</span>
-                    </div>
-                </div>
-                
-                <div class="language-selector">
-                    <button class="lang-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                        <span>English (US)</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </button>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <div class="social-icons">
-                    <a href="#" aria-label="Twitter">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
-                    </a>
-                    <a href="#" aria-label="LinkedIn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                    </a>
-                    <a href="#" aria-label="GitHub">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77a5.07 5.07 0 0 0 1.91-1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                    </a>
-                    <a href="#" aria-label="Instagram">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                    </a>
-                    <a href="#" aria-label="YouTube">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
-                    </a>
-                </div>
-                
-                <div class="payment-methods">
-                    <img src="https://cdn-icons-png.flaticon.com/64/196/196578.png" alt="Visa" class="payment-icon" width="32" height="20" loading="lazy">
-                    <img src="https://cdn-icons-png.flaticon.com/64/196/196561.png" alt="Mastercard" class="payment-icon" width="32" height="20" loading="lazy">
-                    <img src="https://cdn-icons-png.flaticon.com/64/196/196565.png" alt="PayPal" class="payment-icon" width="32" height="20" loading="lazy">
-                    <img src="https://cdn-icons-png.flaticon.com/64/196/196539.png" alt="American Express" class="payment-icon" width="32" height="20" loading="lazy">
-                </div>
-                
-                <div class="copyright">
-                    &copy; 2025 StayAhead. All rights reserved.
-                </div>
-            </div>
+    <footer class="simplified-footer">
+        <div class="footer-logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
+                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="url(#paint0_linear)" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M2 17L12 22L22 17" stroke="url(#paint1_linear)" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M2 12L12 17L22 12" stroke="url(#paint2_linear)" stroke-width="2" stroke-linejoin="round"/>
+                <defs>
+                    <linearGradient id="paint0_linear" x1="2" y1="7" x2="22" y2="7" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#3B82F6"/>
+                        <stop offset="1" stop-color="#8B5CF6"/>
+                    </linearGradient>
+                    <linearGradient id="paint1_linear" x1="2" y1="19.5" x2="22" y2="19.5" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#3B82F6"/>
+                        <stop offset="1" stop-color="#8B5CF6"/>
+                    </linearGradient>
+                    <linearGradient id="paint2_linear" x1="2" y1="14.5" x2="22" y2="14.5" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#3B82F6"/>
+                        <stop offset="1" stop-color="#8B5CF6"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <span>StayAhead</span>
+        </div>
+        
+        <div class="footer-links">
+            <a href="#" class="footer-link">About</a>
+            <a href="#" class="footer-link">Privacy</a>
+            <a href="#" class="footer-link">Terms</a>
+            <a href="#" class="footer-link">Contact</a>
+            <a href="#" class="footer-link">Help</a>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 StayAhead. All rights reserved.
         </div>
     </footer>
 
@@ -1698,27 +1892,45 @@
             const $subInterestSelect = $('#sub-interest-select');
             const $tosCheckbox = $('#tos-checkbox');
             
-            // Initialize fieldsAndCategories once
+            // Initialize fieldsAndCategories with the same structure as index.html
             const fieldsAndCategories = {
+                "Agricultural Sciences": {
+                    "categories": {
+                        "Agricultural Economics": "agri-econ",
+                        "Agronomy": "agronomy",
+                        "Animal Science": "animal-sci",
+                        "Food Science": "food-sci",
+                        "Soil Science": "soil-sci"
+                    }
+                },
+                "Arts & Humanities": {
+                    "categories": {
+                        "Art History": "art-hist",
+                        "Classical Studies": "classics",
+                        "Cultural Studies": "cult-studies",
+                        "Music": "music",
+                        "Philosophy": "philosophy"
+                    }
+                },
                 "Clinical Medicine": {
                     "categories": {
-                        "Oncology": "oncology",
                         "Cardiology": "cardiology",
+                        "Dermatology": "dermatology",
                         "Neurology": "neurology",
-                        "Pediatrics": "pediatrics",
-                        "Psychiatry": "psychiatry"
+                        "Oncology": "oncology",
+                        "Pediatrics": "pediatrics"
                     }
                 },
                 "Computer Science": {
                     "categories": {
                         "Artificial Intelligence": "ai",
+                        "Cybersecurity": "cybersec",
+                        "Data Science": "data-sci",
                         "Machine Learning": "ml",
-                        "Data Science": "data-science",
-                        "Cybersecurity": "cybersecurity",
-                        "Software Engineering": "software-eng"
+                        "Software Engineering": "swe"
                     }
                 }
-                // Add more fields and categories as needed
+                // Add other categories as needed
             };
             
             // Function to populate the main interest select
@@ -1808,6 +2020,32 @@
             // Initialize the form
             populateInterestSelect();
             $subInterestSelect.prop('disabled', true);
+
+            // Optimize scrolling performance
+            let scrollTimeout;
+            window.addEventListener('scroll', function() {
+                // Add a class that disables animations during scroll
+                document.body.classList.add('is-scrolling');
+                
+                // Clear the previous timeout
+                clearTimeout(scrollTimeout);
+                
+                // Set a new timeout to remove the class after scrolling stops
+                scrollTimeout = setTimeout(function() {
+                    document.body.classList.remove('is-scrolling');
+                }, 100);
+            }, { passive: true });
+            
+            // Add this CSS rule to disable animations while scrolling
+            const styleElement = document.createElement('style');
+            styleElement.textContent = `
+                .is-scrolling .phone-container {
+                    transition: none !important;
+                    animation: none !important;
+                    transform: none !important;
+                }
+            `;
+            document.head.appendChild(styleElement);
         });
 
         // Function to show the success modal

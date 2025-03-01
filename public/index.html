@@ -9,24 +9,78 @@
   <link rel="stylesheet" href="styles.css">
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  
 </head>
 <body>
+  <!-- Remove these style rules -->
+  <style>
+    /* Remove gradient background */
+    body {
+        background-image: url('Images/background.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: #333;
+        font-family: 'Arial', sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+    
+    /* Remove blob elements */
+    .blob {
+        display: none;
+    }
+    
+    /* Remove glass navbar styles */
+    .glass-navbar {
+        display: none;
+    }
+    
+    /* Restore the overlay */
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        pointer-events: none;
+        background-color: rgba(255, 255, 255, 0.6);
+        display: block;
+    }
+    
+    /* Restore original container margin */
+    .container {
+        margin-top: 0;
+    }
+  </style>
+  
+  <!-- Remove these blob elements -->
+  <!-- <div class="blob"></div>
+  <div class="blob"></div> -->
+
+  <!-- Restore the overlay -->
   <div class="overlay"></div>
+
+  <!-- Replace glass navbar with original nav -->
   <div class="container">
     <nav>
-      <div class="logo slide-in-left">
+      <div class="logo">
         <img src="Images/logo.svg" alt="StayAhead Logo">
-        StayAhead
+        <span>StayAhead</span>
       </div>
-      <div class="nav-links stagger-fade-in">
+      <div class="nav-links">
         <a href="#features">Features</a>
         <a href="#how-it-works">How It Works</a>
         <a href="#testimonials">Testimonials</a>
         <a href="#faq">FAQ</a>
       </div>
     </nav>
-
+  </div>
+  
+  <!-- Keep the rest of the page content -->
+  <div class="container">
     <!-- Hero Section -->
     <section class="hero">
       <h1 class="fade-in-up">StayAhead! in Your Field — For Free</h1>
@@ -169,7 +223,7 @@
     <p>Below is an exact sample of what is delivered to your inbox each week. This subscriber selected Clinical Medicine as field and Oncology as a subcategory </p></div>
   </div>
 
-  <!-- Inline-styled container to isolate the email snippet’s appearance -->
+  <!-- Inline-styled container to isolate the email snippet's appearance -->
   <div class="newsletter-email-container" style="
       max-width: 600px;
       margin: 20px auto;
